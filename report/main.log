@@ -1,0 +1,1204 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.11.12)  13 NOV 2025 17:35
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/home/bui-anh-quan/CSTTNT_DA1/report/main.tex
+(/home/bui-anh-quan/CSTTNT_DA1/report/main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+ (/usr/share/texlive/texmf-dist/tex/latex/vntex/t5enc.def
+File: t5enc.def 2006/11/21 v1.4 Vietnamese T5 encoding
+Now handling font encoding T5 ...
+... processing UTF-8 mapping file for font encoding T5
+ (/usr/share/texlive/texmf-dist/tex/latex/vntex/t5enc.dfu
+File: t5enc.dfu 2006/08/19 v1.1 UTF8 support for Vietnamese
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0128 (decimal 296)
+   defining Unicode char U+0129 (decimal 297)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0168 (decimal 360)
+   defining Unicode char U+0169 (decimal 361)
+   defining Unicode char U+01A0 (decimal 416)
+   defining Unicode char U+01A1 (decimal 417)
+   defining Unicode char U+01AF (decimal 431)
+   defining Unicode char U+01B0 (decimal 432)
+   defining Unicode char U+1EA0 (decimal 7840)
+   defining Unicode char U+1EA1 (decimal 7841)
+   defining Unicode char U+1EA2 (decimal 7842)
+   defining Unicode char U+1EA3 (decimal 7843)
+   defining Unicode char U+1EA4 (decimal 7844)
+   defining Unicode char U+1EA5 (decimal 7845)
+   defining Unicode char U+1EA6 (decimal 7846)
+   defining Unicode char U+1EA7 (decimal 7847)
+   defining Unicode char U+1EA8 (decimal 7848)
+   defining Unicode char U+1EA9 (decimal 7849)
+   defining Unicode char U+1EAA (decimal 7850)
+   defining Unicode char U+1EAB (decimal 7851)
+   defining Unicode char U+1EAC (decimal 7852)
+   defining Unicode char U+1EAD (decimal 7853)
+   defining Unicode char U+1EAE (decimal 7854)
+   defining Unicode char U+1EAF (decimal 7855)
+   defining Unicode char U+1EB0 (decimal 7856)
+   defining Unicode char U+1EB1 (decimal 7857)
+   defining Unicode char U+1EB2 (decimal 7858)
+   defining Unicode char U+1EB3 (decimal 7859)
+   defining Unicode char U+1EB4 (decimal 7860)
+   defining Unicode char U+1EB5 (decimal 7861)
+   defining Unicode char U+1EB6 (decimal 7862)
+   defining Unicode char U+1EB7 (decimal 7863)
+   defining Unicode char U+1EB8 (decimal 7864)
+   defining Unicode char U+1EB9 (decimal 7865)
+   defining Unicode char U+1EBA (decimal 7866)
+   defining Unicode char U+1EBB (decimal 7867)
+   defining Unicode char U+1EBC (decimal 7868)
+   defining Unicode char U+1EBD (decimal 7869)
+   defining Unicode char U+1EBE (decimal 7870)
+   defining Unicode char U+1EBF (decimal 7871)
+   defining Unicode char U+1EC0 (decimal 7872)
+   defining Unicode char U+1EC1 (decimal 7873)
+   defining Unicode char U+1EC2 (decimal 7874)
+   defining Unicode char U+1EC3 (decimal 7875)
+   defining Unicode char U+1EC4 (decimal 7876)
+   defining Unicode char U+1EC5 (decimal 7877)
+   defining Unicode char U+1EC6 (decimal 7878)
+   defining Unicode char U+1EC7 (decimal 7879)
+   defining Unicode char U+1EC8 (decimal 7880)
+   defining Unicode char U+1EC9 (decimal 7881)
+   defining Unicode char U+1ECA (decimal 7882)
+   defining Unicode char U+1ECB (decimal 7883)
+   defining Unicode char U+1ECC (decimal 7884)
+   defining Unicode char U+1ECD (decimal 7885)
+   defining Unicode char U+1ECE (decimal 7886)
+   defining Unicode char U+1ECF (decimal 7887)
+   defining Unicode char U+1ED0 (decimal 7888)
+   defining Unicode char U+1ED1 (decimal 7889)
+   defining Unicode char U+1ED2 (decimal 7890)
+   defining Unicode char U+1ED3 (decimal 7891)
+   defining Unicode char U+1ED4 (decimal 7892)
+   defining Unicode char U+1ED5 (decimal 7893)
+   defining Unicode char U+1ED6 (decimal 7894)
+   defining Unicode char U+1ED7 (decimal 7895)
+   defining Unicode char U+1ED8 (decimal 7896)
+   defining Unicode char U+1ED9 (decimal 7897)
+   defining Unicode char U+1EDA (decimal 7898)
+   defining Unicode char U+1EDB (decimal 7899)
+   defining Unicode char U+1EDC (decimal 7900)
+   defining Unicode char U+1EDD (decimal 7901)
+   defining Unicode char U+1EDE (decimal 7902)
+   defining Unicode char U+1EDF (decimal 7903)
+   defining Unicode char U+1EE0 (decimal 7904)
+   defining Unicode char U+1EE1 (decimal 7905)
+   defining Unicode char U+1EE2 (decimal 7906)
+   defining Unicode char U+1EE3 (decimal 7907)
+   defining Unicode char U+1EE4 (decimal 7908)
+   defining Unicode char U+1EE5 (decimal 7909)
+   defining Unicode char U+1EE6 (decimal 7910)
+   defining Unicode char U+1EE7 (decimal 7911)
+   defining Unicode char U+1EE8 (decimal 7912)
+   defining Unicode char U+1EE9 (decimal 7913)
+   defining Unicode char U+1EEA (decimal 7914)
+   defining Unicode char U+1EEB (decimal 7915)
+   defining Unicode char U+1EEC (decimal 7916)
+   defining Unicode char U+1EED (decimal 7917)
+   defining Unicode char U+1EEE (decimal 7918)
+   defining Unicode char U+1EEF (decimal 7919)
+   defining Unicode char U+1EF0 (decimal 7920)
+   defining Unicode char U+1EF1 (decimal 7921)
+   defining Unicode char U+1EF2 (decimal 7922)
+   defining Unicode char U+1EF3 (decimal 7923)
+   defining Unicode char U+1EF4 (decimal 7924)
+   defining Unicode char U+1EF5 (decimal 7925)
+   defining Unicode char U+1EF6 (decimal 7926)
+   defining Unicode char U+1EF7 (decimal 7927)
+   defining Unicode char U+1EF8 (decimal 7928)
+   defining Unicode char U+1EF9 (decimal 7929)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+))
+LaTeX Font Info:    Trying to load font information for T5+cmr on input line 112.
+ (/usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmr.fd
+File: t5cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2024/01/07 v24.1 The Babel package
+\babel@savecnt=\count195
+\U@D=\dimen141
+\l@unhyphenated=\language34
+ (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count196
+ (/usr/share/texlive/texmf-dist/tex/generic/babel-vietnamese/vietnamese.ldf
+Language: vietnamese 
+ Loading definitions for the Vietnamese font encoding (/usr/share/texlive/texmf-dist/tex/latex/vntex/t5enc.def
+File: t5enc.def 2006/11/21 v1.4 Vietnamese T5 encoding
+LaTeX Font Info:    Redeclaring font encoding T5 on input line 75.
+)
+Package babel Info: Making " an active character on input line 147.
+)) (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/vi/babel-vietnamese.tex
+Package babel Info: Importing font and identification data for vietnamese
+(babel)             from babel-vi.ini. Reported on input line 11.
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen142
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen143
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count197
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count198
+\leftroot@=\count199
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count266
+\DOTSCASE@=\count267
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen144
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count268
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count269
+\dotsspace@=\muskip16
+\c@parentequation=\count270
+\dspbrk@lvl=\count271
+\tag@help=\toks20
+\row@=\count272
+\column@=\count273
+\maxfields@=\count274
+\andhelp@=\toks21
+\eqnshift@=\dimen145
+\alignsep@=\dimen146
+\tagshift@=\dimen147
+\tagwidth@=\dimen148
+\totwidth@=\dimen149
+\lineht@=\dimen150
+\@envbody=\toks22
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks24
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count275
+\calc@Bcount=\count276
+\calc@Adimen=\dimen151
+\calc@Bdimen=\dimen152
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count277
+\calc@Cskip=\skip55
+) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count278
+\l_MT_multwidth_dim=\dimen153
+\origjot=\skip56
+\l_MT_shortvdotswithinadjustabove_dim=\dimen154
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen155
+\l_MT_above_intertext_sep=\dimen156
+\l_MT_below_intertext_sep=\dimen157
+\l_MT_above_shortintertext_sep=\dimen158
+\l_MT_below_shortintertext_sep=\dimen159
+\xmathstrut@box=\box53
+\xmathstrut@dim=\dimen160
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks25
+\pgfutil@tempdima=\dimen161
+\pgfutil@tempdimb=\dimen162
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box54
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen163
+\Gin@req@width=\dimen164
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks26
+\pgfkeys@temptoks=\toks27
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks28
+))
+\pgf@x=\dimen165
+\pgf@y=\dimen166
+\pgf@xa=\dimen167
+\pgf@ya=\dimen168
+\pgf@xb=\dimen169
+\pgf@yb=\dimen170
+\pgf@xc=\dimen171
+\pgf@yc=\dimen172
+\pgf@xd=\dimen173
+\pgf@yd=\dimen174
+\w@pgf@writea=\write3
+\r@pgf@reada=\read3
+\c@pgf@counta=\count279
+\c@pgf@countb=\count280
+\c@pgf@countc=\count281
+\c@pgf@countd=\count282
+\t@pgf@toka=\toks29
+\t@pgf@tokb=\toks30
+\t@pgf@tokc=\toks31
+\pgf@sys@id@count=\count283
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count284
+\pgfsyssoftpath@bigbuffer@items=\count285
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen175
+\pgfmath@count=\count286
+\pgfmath@box=\box55
+\pgfmath@toks=\toks32
+\pgfmath@stack@operand=\toks33
+\pgfmath@stack@operation=\toks34
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count287
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen176
+\pgf@picmaxx=\dimen177
+\pgf@picminy=\dimen178
+\pgf@picmaxy=\dimen179
+\pgf@pathminx=\dimen180
+\pgf@pathmaxx=\dimen181
+\pgf@pathminy=\dimen182
+\pgf@pathmaxy=\dimen183
+\pgf@xx=\dimen184
+\pgf@xy=\dimen185
+\pgf@yx=\dimen186
+\pgf@yy=\dimen187
+\pgf@zx=\dimen188
+\pgf@zy=\dimen189
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen190
+\pgf@path@lasty=\dimen191
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen192
+\pgf@shorten@start@additional=\dimen193
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box56
+\pgf@hbox=\box57
+\pgf@layerbox@main=\box58
+\pgf@picture@serial@count=\count288
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen194
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen195
+\pgf@pt@y=\dimen196
+\pgf@pt@temp=\dimen197
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen198
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen199
+\pgf@sys@shading@range@num=\count289
+\pgf@shadingcount=\count290
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box59
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box60
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen256
+\pgf@nodesepend=\dimen257
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen258
+\pgffor@skip=\dimen259
+\pgffor@stack=\toks35
+\pgffor@toks=\toks36
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count291
+\pgfplotmarksize=\dimen260
+)
+\tikz@lastx=\dimen261
+\tikz@lasty=\dimen262
+\tikz@lastxsaved=\dimen263
+\tikz@lastysaved=\dimen264
+\tikz@lastmovetox=\dimen265
+\tikz@lastmovetoy=\dimen266
+\tikzleveldistance=\dimen267
+\tikzsiblingdistance=\dimen268
+\tikz@figbox=\box61
+\tikz@figbox@bg=\box62
+\tikz@tempbox=\box63
+\tikz@tempbox@bg=\box64
+\tikztreelevel=\count292
+\tikznumberofchildren=\count293
+\tikznumberofcurrentchild=\count294
+\tikz@fig@count=\count295
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count296
+\pgfmatrixcurrentcolumn=\count297
+\pgf@matrix@numberofcolumns=\count298
+)
+\tikz@expandcount=\count299
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip57
+\enit@outerparindent=\dimen269
+\enit@toks=\toks37
+\enit@inbox=\box65
+\enit@count@id=\count300
+\enitdp@description=\count301
+) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count302
+\Gm@cntv=\count303
+\c@Gm@tempcnt=\count304
+\Gm@bindingoffset=\dimen270
+\Gm@wd@mp=\dimen271
+\Gm@odd@mp=\dimen272
+\Gm@even@mp=\dimen273
+\Gm@layoutwidth=\dimen274
+\Gm@layoutheight=\dimen275
+\Gm@layouthoffset=\dimen276
+\Gm@layoutvoffset=\dimen277
+\Gm@dimlist=\toks38
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-01-20 v7.01h Hypertext links for LaTeX
+ (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+ (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count305
+) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count306
+)
+\@linkdim=\dimen278
+\Hy@linkcounter=\count307
+\Hy@pagecounter=\count308
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count309
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4179.
+Package hyperref Info: Link nesting OFF on input line 4184.
+Package hyperref Info: Hyper index ON on input line 4187.
+Package hyperref Info: Plain pages OFF on input line 4194.
+Package hyperref Info: Backreferencing OFF on input line 4199.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4446.
+\c@Hy@tempcnt=\count310
+ (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4784.
+\XeTeXLinkMargin=\dimen279
+ (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count311
+\Field@Width=\dimen280
+\Fld@charsize=\dimen281
+Package hyperref Info: Hyper figures OFF on input line 6063.
+Package hyperref Info: Link nesting OFF on input line 6068.
+Package hyperref Info: Hyper index ON on input line 6071.
+Package hyperref Info: backreferencing OFF on input line 6078.
+Package hyperref Info: Link coloring OFF on input line 6083.
+Package hyperref Info: Link coloring with OCG OFF on input line 6088.
+Package hyperref Info: PDF/A mode OFF on input line 6093.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count312
+\c@Item=\count313
+\c@Hfootnote=\count314
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-01-20 v7.01h Hyperref driver for pdfTeX
+ (/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+)
+\Fld@listcount=\count315
+\c@bookmark@seq@number=\count316
+ (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip58
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+ (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count317
+\float@exts=\toks39
+\float@box=\box66
+\@float@everytoks=\toks40
+\@floatcapt=\box67
+) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks41
+\c@algorithm=\count318
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+ (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count319
+\c@ALG@rem=\count320
+\c@ALG@nested=\count321
+\ALG@tlm=\skip59
+\ALG@thistlm=\skip60
+\c@ALG@Lnr=\count322
+\c@ALG@blocknr=\count323
+\c@ALG@storecount=\count324
+\c@ALG@tmpcounter=\count325
+\ALG@tmplength=\skip61
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen282
+\lightrulewidth=\dimen283
+\cmidrulewidth=\dimen284
+\belowrulesep=\dimen285
+\belowbottomsep=\dimen286
+\aboverulesep=\dimen287
+\abovetopsep=\dimen288
+\cmidrulesep=\dimen289
+\cmidrulekern=\dimen290
+\defaultaddspace=\dimen291
+\@cmidla=\count326
+\@cmidlb=\count327
+\@aboverulesep=\dimen292
+\@belowrulesep=\dimen293
+\@thisruleclass=\count328
+\@lastruleclass=\count329
+\@thisrulewidth=\dimen294
+) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip62
+\multirow@cntb=\count330
+\multirow@dima=\skip63
+\bigstrutjot=\dimen295
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count331
+\l__pdf_internal_box=\box68
+) (./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count332
+\scratchdimen=\dimen296
+\scratchbox=\box69
+\nofMPsegments=\count333
+\nofMParguments=\count334
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count335
+\MPscratchDim=\dimen297
+\MPnumerator=\count336
+\makeMPintoPDFobject=\count337
+\everyMPtoPDFconversion=\toks43
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring OFF on input line 23.
+(./main.out) (./main.out)
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (./main.toc)
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Overfull \hbox (50.84401pt too wide) in paragraph at lines 75--76
+ []\T5/cmr/bx/n/12 X˚ l˛ bi∂n.[] \T5/cmr/m/n/12 Sau c™p nh™t, s˚ dˆng \T5/cmr/bx/n/12 chi∏u (clipping) \T5/cmr/m/n/12 v∑ mi∑n hÒp lª $\OT1/cmr/m/n/12 [[]\OML/cmm/m/it/12 ; []\OT1/cmr/m/n/12 ]$
+ []
+
+
+Overfull \hbox (4.82147pt too wide) in paragraph at lines 107--108
+[]\T5/cmr/m/n/12 Baykaso^^Hglu, A., Ozsoydan, F. B., & Subulan, K. (2014). An improved firefly algorithm
+ []
+
+
+Overfull \hbox (37.79024pt too wide) in paragraph at lines 107--108
+\T5/cmr/m/n/12 for solving dynamic multidimensional knapsack problems. \T5/cmr/m/it/12 Expert Systems with Applications,
+ []
+
+
+Overfull \hbox (1.38255pt too wide) in paragraph at lines 108--109
+\T5/cmr/m/n/12 & T. Zeugmann (Eds.), \T5/cmr/m/it/12 Stochastic Algorithms: Foundations and Applications \T5/cmr/m/n/12 (SAGA
+ []
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 116.
+[3] [4] [5]
+Overfull \hbox (9.94946pt too wide) in paragraph at lines 203--205
+[]\T5/cmr/m/it/12 Crossover\T5/cmr/m/n/12 : s˚ dˆng Simulated Binary Crossover (SBX), \T5/cmr/bx/n/12 khÊng \T5/cmr/m/n/12 ph£i one-point/two-
+ []
+
+
+Overfull \hbox (36.9093pt too wide) in paragraph at lines 205--206
+[]\T5/cmr/m/it/12 Mutation\T5/cmr/m/n/12 : perturbation t¯ng chi∑u vÓi x°c sußt mutation_rate; c°c gi° tr‡ mutation_rate
+ []
+
+LaTeX Font Info:    Trying to load font information for T5+cmtt on input line 230.
+(/usr/share/texlive/texmf-dist/tex/latex/vntex/t5cmtt.fd
+File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+Overfull \hbox (56.02977pt too wide) in paragraph at lines 230--231
+[]\T5/cmr/m/n/12 Di chuy∫n c‚ h˜Óng (directed movement) l™t tËi ^^_a mÎt sË bit mÈi b˜Óc (\T5/cmtt/m/n/12 max_flips_per_move\T5/cmr/m/n/12 =3)
+ []
+
+[6]
+Overfull \hbox (116.44157pt too wide) in paragraph at lines 253--254
+\T5/cmr/m/n/12 H†m c‚ nhi∑u c¸c ti∫u ^^_‡a ph˜Ïng v† mÎt c¸c ti∫u to†n cˆc t§i $\OT1/cmr/bx/n/12 0$ \T5/cmr/m/n/12 vÓi $\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OT1/cmr/bx/n/12 0\OT1/cmr/m/n/12 ) = 0$ \T5/cmr/m/n/12 :contentReference[oaicite:2]index=2. 
+ []
+
+[7]
+Overfull \hbox (0.44162pt too wide) in paragraph at lines 281--282
+[]\T5/cmr/m/it/12 Data profiles\T5/cmr/m/n/12 : x°c sußt gi£i ^^_˜Òc b†i to°n trong mÎt budget chu©n ho°, theo Mor≤^^UWild
+ []
+
+
+Overfull \hbox (5.93163pt too wide) in paragraph at lines 293--294
+\T5/cmr/m/n/12 t¯ng cßu hºnh, v† Copeland ranking ^^_∫ tÍng hÒp sË l¶n th≠ng^^Uthua. (Friedman/Nemenyi
+ []
+
+<../benchmark/results/plots/rastrigin_ecdf_quick_convergence.png, id=154, 859.7721pt x 354.123pt>
+File: ../benchmark/results/plots/rastrigin_ecdf_quick_convergence.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_ecdf_quick_convergence.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_ecdf_quick_convergence.png  used on input line 306.
+(pdftex.def)             Requested size: 432.48051pt x 178.13094pt.
+[8]
+<../benchmark/results/plots/rastrigin_ecdf_multimodal_escape.png, id=163, 856.3995pt x 354.123pt>
+File: ../benchmark/results/plots/rastrigin_ecdf_multimodal_escape.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_ecdf_multimodal_escape.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_ecdf_multimodal_escape.png  used on input line 321.
+(pdftex.def)             Requested size: 432.48051pt x 178.83339pt.
+ [9
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.329     \item ·
+                 ªû m·ª©c Bronze, ch·ªâ c√≤n c√°c bi·∫øn th·ªÉ c·ªßa FA (b·∫...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.329     \item ·
+                 ªû m·ª©c Bronze, ch·ªâ c√≤n c√°c bi·∫øn th·ªÉ c·ªßa FA (b·∫... <../benchmark/results/plots/rastrigin_ecdf_quick_convergence.png> <../benchmark/results/plots/rastrigin_ecdf_multimodal_escape.png>]
+<../benchmark/results/plots/rastrigin_ecdf_scalability.png, id=173, 859.7721pt x 353.8821pt>
+File: ../benchmark/results/plots/rastrigin_ecdf_scalability.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_ecdf_scalability.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_ecdf_scalability.png  used on input line 336.
+(pdftex.def)             Requested size: 432.48051pt x 178.00975pt.
+<../benchmark/results/plots/rastrigin_fixed_budget_quick_convergence.png, id=174, 859.0494pt x 357.2547pt>
+File: ../benchmark/results/plots/rastrigin_fixed_budget_quick_convergence.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_fixed_budget_quick_convergence.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_fixed_budget_quick_convergence.png  used on input line 352.
+(pdftex.def)             Requested size: 409.71692pt x 170.39005pt.
+ [10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.356 
+       <../benchmark/results/plots/rastrigin_ecdf_scalability.png>]
+<../benchmark/results/plots/rastrigin_fixed_budget_multimodal_escape.png, id=181, 859.0494pt x 357.2547pt>
+File: ../benchmark/results/plots/rastrigin_fixed_budget_multimodal_escape.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_fixed_budget_multimodal_escape.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_fixed_budget_multimodal_escape.png  used on input line 367.
+(pdftex.def)             Requested size: 409.71692pt x 170.39005pt.
+ [11
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.377     \item T
+                 inh ch·ªânh \emph{specialist} gi√∫p FA gi·∫£m th√™m v√†i ƒë...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.377     \item T
+                 inh ch·ªânh \emph{specialist} gi√∫p FA gi·∫£m th√™m v√†i ƒë... <../benchmark/results/plots/rastrigin_fixed_budget_quick_convergence.png> <../benchmark/results/plots/rastrigin_fixed_budget_multimodal_escape.png>]
+<../benchmark/results/plots/rastrigin_fixed_budget_scalability.png, id=191, 858.8085pt x 357.2547pt>
+File: ../benchmark/results/plots/rastrigin_fixed_budget_scalability.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_fixed_budget_scalability.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_fixed_budget_scalability.png  used on input line 382.
+(pdftex.def)             Requested size: 409.71692pt x 170.4391pt.
+<../benchmark/results/plots/rastrigin_ert_bronze.png, id=192, 859.0494pt x 356.0502pt>
+File: ../benchmark/results/plots/rastrigin_ert_bronze.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_ert_bronze.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_ert_bronze.png  used on input line 400.
+(pdftex.def)             Requested size: 432.48051pt x 179.25249pt.
+ [12
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.404 
+       <../benchmark/results/plots/rastrigin_fixed_budget_scalability.png>]
+<../benchmark/results/plots/rastrigin_ert_silver.png, id=199, 859.0494pt x 356.0502pt>
+File: ../benchmark/results/plots/rastrigin_ert_silver.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_ert_silver.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_ert_silver.png  used on input line 407.
+(pdftex.def)             Requested size: 432.48051pt x 179.25249pt.
+<../benchmark/results/plots/rastrigin_ert_gold.png, id=200, 859.0494pt x 356.0502pt>
+File: ../benchmark/results/plots/rastrigin_ert_gold.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_ert_gold.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_ert_gold.png  used on input line 414.
+(pdftex.def)             Requested size: 432.48051pt x 179.25249pt.
+ [13
+pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.422     \item \textbf
+                       {Ng∆∞·ª°ng Bronze.} ·ªû c·∫•u h√¨nh \emph{quick\_conv...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.422     \item \textbf
+                       {Ng∆∞·ª°ng Bronze.} ·ªû c·∫•u h√¨nh \emph{quick\_conv...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.422     \item \textbf
+                       {Ng∆∞·ª°ng Bronze.} ·ªû c·∫•u h√¨nh \emph{quick\_conv... <../benchmark/results/plots/rastrigin_ert_bronze.png> <../benchmark/results/plots/rastrigin_ert_silver.png> <../benchmark/results/plots/rastrigin_ert_gold.png>]
+<../benchmark/results/plots/rastrigin_perf_profile.png, id=214, 712.8231pt x 421.3341pt>
+File: ../benchmark/results/plots/rastrigin_perf_profile.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_perf_profile.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_perf_profile.png  used on input line 429.
+(pdftex.def)             Requested size: 386.96027pt x 228.72568pt.
+ [14
+pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.439     \item H
+                 C v√† SA h·∫ßu nh∆∞ kh√¥ng xu·∫•t hi·ªán tr√™n performance ... <../benchmark/results/plots/rastrigin_perf_profile.png>]
+<../benchmark/results/plots/rastrigin_data_profile.png, id=221, 714.0276pt x 421.3341pt>
+File: ../benchmark/results/plots/rastrigin_data_profile.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_data_profile.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_data_profile.png  used on input line 444.
+(pdftex.def)             Requested size: 386.96027pt x 228.33994pt.
+<../benchmark/results/plots/rastrigin_diversity_quick_convergence.png, id=224, 1004.553pt x 712.8231pt>
+File: ../benchmark/results/plots/rastrigin_diversity_quick_convergence.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_diversity_quick_convergence.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_diversity_quick_convergence.png  used on input line 468.
+(pdftex.def)             Requested size: 432.48051pt x 306.88864pt.
+ [15
+pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.472 
+       <../benchmark/results/plots/rastrigin_data_profile.png>]
+<../benchmark/results/plots/rastrigin_diversity_multimodal_escape.png, id=234, 1004.553pt x 712.8231pt>
+File: ../benchmark/results/plots/rastrigin_diversity_multimodal_escape.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_diversity_multimodal_escape.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_diversity_multimodal_escape.png  used on input line 475.
+(pdftex.def)             Requested size: 432.48051pt x 306.88864pt.
+ [16
+pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.479 
+       <../benchmark/results/plots/rastrigin_diversity_quick_convergence.png>]
+<../benchmark/results/plots/rastrigin_diversity_scalability.png, id=240, 1004.553pt x 712.8231pt>
+File: ../benchmark/results/plots/rastrigin_diversity_scalability.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_diversity_scalability.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_diversity_scalability.png  used on input line 482.
+(pdftex.def)             Requested size: 432.48051pt x 306.88864pt.
+ [17
+pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.490     \item \textbf
+                       {Kh·ªüi t·∫°o.}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.490     \item \textbf
+                       {Kh·ªüi t·∫°o.} <../benchmark/results/plots/rastrigin_diversity_multimodal_escape.png> <../benchmark/results/plots/rastrigin_diversity_scalability.png>]
+<../benchmark/results/plots/rastrigin_stagnation_quick_convergence.png, id=250, 1004.3121pt x 357.2547pt>
+File: ../benchmark/results/plots/rastrigin_stagnation_quick_convergence.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_stagnation_quick_convergence.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_stagnation_quick_convergence.png  used on input line 523.
+(pdftex.def)             Requested size: 432.48051pt x 153.84547pt.
+ [18]
+<../benchmark/results/plots/rastrigin_stagnation_multimodal_escape.png, id=258, 1004.3121pt x 357.2547pt>
+File: ../benchmark/results/plots/rastrigin_stagnation_multimodal_escape.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_stagnation_multimodal_escape.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_stagnation_multimodal_escape.png  used on input line 530.
+(pdftex.def)             Requested size: 432.48051pt x 153.84547pt.
+<../benchmark/results/plots/rastrigin_stagnation_scalability.png, id=259, 1004.3121pt x 357.2547pt>
+File: ../benchmark/results/plots/rastrigin_stagnation_scalability.png Graphic file (type png)
+<use ../benchmark/results/plots/rastrigin_stagnation_scalability.png>
+Package pdftex.def Info: ../benchmark/results/plots/rastrigin_stagnation_scalability.png  used on input line 537.
+(pdftex.def)             Requested size: 432.48051pt x 153.84547pt.
+ [19
+pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.549     \item \textbf
+                       {Multimodal\_escape (30 chi·ªÅu).}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.549     \item \textbf
+                       {Multimodal\_escape (30 chi·ªÅu).}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.549     \item \textbf
+                       {Multimodal\_escape (30 chi·ªÅu).} <../benchmark/results/plots/rastrigin_stagnation_quick_convergence.png> <../benchmark/results/plots/rastrigin_stagnation_multimodal_escape.png> <../benchmark/results/plots/rastrigin_stagnation_scalability.png>]
+Overfull \hbox (18.87643pt too wide) in paragraph at lines 549--552
+[]\T5/cmr/bx/n/12 Multimodal_escape (30 chi∑u). \T5/cmr/m/n/12 Khi dimension t´ng, t˜Ïng quan ^^_£o chi∑u. Histogram
+ []
+
+
+LaTeX Warning: Reference `subsec:metrics' on page 20 undefined on input line 571.
+
+<../benchmark/results/plots/knapsack_fixed_budget_Gap_10pct.png, id=269, 1292.4285pt x 357.2547pt>
+File: ../benchmark/results/plots/knapsack_fixed_budget_Gap_10pct.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_fixed_budget_Gap_10pct.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_fixed_budget_Gap_10pct.png  used on input line 575.
+(pdftex.def)             Requested size: 446.13727pt x 123.3184pt.
+[20]
+<../benchmark/results/plots/knapsack_fixed_budget_Gap_30pct.png, id=275, 1292.4285pt x 357.2547pt>
+File: ../benchmark/results/plots/knapsack_fixed_budget_Gap_30pct.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_fixed_budget_Gap_30pct.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_fixed_budget_Gap_30pct.png  used on input line 582.
+(pdftex.def)             Requested size: 446.13727pt x 123.3184pt.
+<../benchmark/results/plots/knapsack_fixed_budget_Gap_50pct.png, id=276, 1292.4285pt x 357.2547pt>
+File: ../benchmark/results/plots/knapsack_fixed_budget_Gap_50pct.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_fixed_budget_Gap_50pct.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_fixed_budget_Gap_50pct.png  used on input line 589.
+(pdftex.def)             Requested size: 446.13727pt x 123.3184pt.
+<../benchmark/results/plots/knapsack_fixed_budget_Gap_100pct.png, id=277, 1292.4285pt x 357.2547pt>
+File: ../benchmark/results/plots/knapsack_fixed_budget_Gap_100pct.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_fixed_budget_Gap_100pct.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_fixed_budget_Gap_100pct.png  used on input line 596.
+(pdftex.def)             Requested size: 446.13727pt x 123.3184pt.
+ [21
+pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.604     \item \textbf
+                       {M·ª©c ƒë·ªô kh√≥ t·ªïng th·ªÉ.}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.604     \item \textbf
+                       {M·ª©c ƒë·ªô kh√≥ t·ªïng th·ªÉ.}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.604     \item \textbf
+                       {M·ª©c ƒë·ªô kh√≥ t·ªïng th·ªÉ.}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.604     \item \textbf
+                       {M·ª©c ƒë·ªô kh√≥ t·ªïng th·ªÉ.} <../benchmark/results/plots/knapsack_fixed_budget_Gap_10pct.png> <../benchmark/results/plots/knapsack_fixed_budget_Gap_30pct.png> <../benchmark/results/plots/knapsack_fixed_budget_Gap_50pct.png> <../benchmark/results/plots/knapsack_fixed_budget_Gap_100pct.png>] [22]
+<../benchmark/results/plots/knapsack_data_profiles.png, id=294, 714.0276pt x 434.3427pt>
+File: ../benchmark/results/plots/knapsack_data_profiles.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_data_profiles.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_data_profiles.png  used on input line 649.
+(pdftex.def)             Requested size: 446.13727pt x 271.39061pt.
+
+
+LaTeX Warning: Citation `more2009benchmarking' on page 23 undefined on input line 654.
+
+<../benchmark/results/plots/knapsack_performance_profiles.png, id=296, 714.0276pt x 434.3427pt>
+File: ../benchmark/results/plots/knapsack_performance_profiles.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_performance_profiles.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_performance_profiles.png  used on input line 658.
+(pdftex.def)             Requested size: 446.13727pt x 271.39061pt.
+[23
+pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.662 
+       <../benchmark/results/plots/knapsack_data_profiles.png>]
+<../benchmark/results/plots/knapsack_pairwise_heatmap_overall.png, id=306, 673.3155pt x 577.6782pt>
+File: ../benchmark/results/plots/knapsack_pairwise_heatmap_overall.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_pairwise_heatmap_overall.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_pairwise_heatmap_overall.png  used on input line 668.
+(pdftex.def)             Requested size: 446.13727pt x 382.76727pt.
+ [24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.672 
+       <../benchmark/results/plots/knapsack_performance_profiles.png>]
+<../benchmark/results/plots/knapsack_copeland_ranking.png, id=313, 710.1732pt x 426.6339pt>
+File: ../benchmark/results/plots/knapsack_copeland_ranking.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_copeland_ranking.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_copeland_ranking.png  used on input line 675.
+(pdftex.def)             Requested size: 446.13727pt x 268.0191pt.
+ [25
+pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.679 
+       <../benchmark/results/plots/knapsack_pairwise_heatmap_overall.png>]
+
+LaTeX Warning: Citation `demvsar2006statistical' on page 26 undefined on input line 680.
+
+<../benchmark/results/plots/knapsack_pairwise_heatmap_penalty.png, id=323, 674.0382pt x 571.1739pt>
+File: ../benchmark/results/plots/knapsack_pairwise_heatmap_penalty.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_pairwise_heatmap_penalty.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_pairwise_heatmap_penalty.png  used on input line 691.
+(pdftex.def)             Requested size: 446.13727pt x 378.04793pt.
+[26
+pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.695 
+       <../benchmark/results/plots/knapsack_copeland_ranking.png>]
+<../benchmark/results/plots/knapsack_pairwise_heatmap_repair.png, id=331, 674.0382pt x 571.1739pt>
+File: ../benchmark/results/plots/knapsack_pairwise_heatmap_repair.png Graphic file (type png)
+<use ../benchmark/results/plots/knapsack_pairwise_heatmap_repair.png>
+Package pdftex.def Info: ../benchmark/results/plots/knapsack_pairwise_heatmap_repair.png  used on input line 698.
+(pdftex.def)             Requested size: 446.13727pt x 378.04793pt.
+ [27
+pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.702 
+       <../benchmark/results/plots/knapsack_pairwise_heatmap_penalty.png>] [28
+pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.717 
+       <../benchmark/results/plots/knapsack_pairwise_heatmap_repair.png>]
+Overfull \hbox (16.29645pt too wide) in paragraph at lines 750--751
+[]\T5/cmr/m/n/12 K∏t hÒp c°c y∏u tË tr∂n, FA ^^_§t ph•n bË gap nghi∂ng m§nh v∑ phΩa nh‰, performance/data
+ []
+
+[29] [30]
+Overfull \hbox (10.41656pt too wide) in paragraph at lines 790--791
+\T5/cmr/m/n/12 c°c tham sË trong \T5/cmtt/m/n/12 config.py \T5/cmr/m/n/12 ^^_˜Òc ^^_i∑u chønh thı cÊng cho t¯ng k‡ch b£n (10D/30D/50D
+ []
+
+[31] (./main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: C7AB7F8B3ABAE21A8C8BB92B5B75E7D4;4027.
+ ) 
+Here is how much of TeX's memory you used:
+ 24356 strings out of 475556
+ 450051 string characters out of 5782323
+ 1939975 words of memory out of 5000000
+ 45994 multiletter control sequences out of 15000+600000
+ 580136 words of font info for 88 fonts, out of 8000000 for 9000
+ 331 hyphenation exceptions out of 8191
+ 102i,8n,107p,1092b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/bui-anh-quan/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vntt12.pfb>
+Output written on main.pdf (31 pages, 4801104 bytes).
+PDF statistics:
+ 476 PDF objects out of 1000 (max. 8388607)
+ 346 compressed objects within 4 object streams
+ 112 named destinations out of 1000 (max. 500000)
+ 268 words of extra memory for PDF output out of 10000 (max. 10000000)
+

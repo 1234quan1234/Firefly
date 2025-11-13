@@ -1,0 +1,43 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {section}{\numberline {1}Firefly Algorithm}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Giới thiệu}{2}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}(1.1) Ý tưởng cốt lõi}{2}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}(1.2) Lịch sử ngắn gọn}{2}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}(1.3) Ứng dụng tiêu biểu}{2}{subsubsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.2}Cơ sở toán học của thuật toán}{2}{subsection.1.2}%
+\contentsline {paragraph}{Độ sáng (Brightness).}{2}{section*.2}%
+\contentsline {paragraph}{Hấp dẫn suy giảm theo khoảng cách.}{2}{section*.3}%
+\contentsline {paragraph}{Quy tắc cập nhật (không gian liên tục).}{3}{section*.4}%
+\contentsline {paragraph}{Xử lý biên.}{3}{section*.5}%
+\contentsline {paragraph}{Rời rạc hoá cho Knapsack 0/1.}{3}{section*.6}%
+\contentsline {paragraph}{Gợi ý lựa chọn tham số.}{3}{section*.7}%
+\contentsline {subsection}{\numberline {1.3}Chi tiết triển khai thuật toán (Mã giả)}{4}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Thuật toán dùng để so sánh}{5}{subsection.1.4}%
+\contentsline {paragraph}{Hill Climbing (HC).}{5}{section*.9}%
+\contentsline {paragraph}{Simulated Annealing (SA).}{6}{section*.10}%
+\contentsline {paragraph}{Genetic Algorithm (GA).}{6}{section*.11}%
+\contentsline {paragraph}{Firefly Algorithm (FA).}{6}{section*.12}%
+\contentsline {subsection}{\numberline {1.5}Bài toán kiểm tra và tiêu chí đánh giá}{7}{subsection.1.5}%
+\contentsline {paragraph}{Bài toán Rastrigin (liên tục).}{7}{section*.13}%
+\contentsline {paragraph}{Bài toán Knapsack 0/1 (rời rạc).}{8}{section*.14}%
+\contentsline {paragraph}{Chỉ số đánh giá.}{8}{section*.15}%
+\contentsline {subsection}{\numberline {1.6}Kết quả benchmark và phân tích}{9}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Rastrigin: mức độ tiệm cận nghiệm tối ưu và đặc trưng hội tụ}{9}{subsubsection.1.6.1}%
+\contentsline {paragraph}{ECDF theo ngưỡng mục tiêu.}{9}{figure.1}%
+\contentsline {paragraph}{Fixed-Budget Performance: sai số cuối cùng dưới các mức ngân sách cố định.}{11}{figure.4}%
+\contentsline {paragraph}{ERT, performance profiles và data profiles.}{13}{figure.9}%
+\contentsline {subsubsection}{\numberline {1.6.2}Rastrigin: đa dạng quần thể và hiện tượng dừng sớm (stagnation)}{15}{subsubsection.1.6.2}%
+\contentsline {paragraph}{Đa dạng quần thể theo thời gian.}{15}{section*.19}%
+\contentsline {paragraph}{Phân tích stagnation.}{18}{section*.20}%
+\contentsline {paragraph}{Kết luận cục bộ cho 1.6.2.}{20}{section*.21}%
+\contentsline {subsubsection}{\numberline {1.6.3}Knapsack: hiệu năng fixed-budget (gap tới nghiệm tối ưu)}{20}{subsubsection.1.6.3}%
+\contentsline {paragraph}{Nhận xét tổng hợp cho Knapsack.}{23}{section*.22}%
+\contentsline {subsubsection}{\numberline {1.6.4}Knapsack: performance/data profiles và so sánh thống kê}{23}{subsubsection.1.6.4}%
+\contentsline {subsection}{\numberline {1.7}Thảo luận và kết luận}{29}{subsection.1.7}%
+\contentsline {paragraph}{Rastrigin: giới hạn của bộ thuật toán trong bối cảnh high-dimensional.}{29}{section*.23}%
+\contentsline {paragraph}{Firefly Algorithm trên Rastrigin: tác động của hàm hấp dẫn suy giảm theo khoảng cách.}{29}{section*.24}%
+\contentsline {paragraph}{Knapsack: hiệu quả của FA rời rạc kết hợp chiến lược repair.}{29}{section*.25}%
+\contentsline {paragraph}{Ý nghĩa và hạn chế của performance/data profiles khi success rate thấp.}{30}{section*.26}%
+\contentsline {paragraph}{Không có thuật toán tối ưu “mọi nơi”: liên hệ với No Free Lunch.}{30}{section*.27}%
+\contentsline {paragraph}{Bài học về thiết kế benchmark và cách diễn giải kết quả.}{31}{section*.28}%
+\contentsline {paragraph}{Tổng kết.}{31}{section*.29}%
