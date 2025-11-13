@@ -1,3 +1,8 @@
+Hiểu ý rồi: nội dung giữ nguyên, chỉ gọt lại văn phong cho bớt vibe “changelog / NEW feature”, đọc như README sản phẩm ổn định.
+
+Dưới đây là bản đã chỉnh, toàn bộ trong code block để mày copy thẳng vào `README.md`:
+
+```markdown
 # AI Search and Optimization Project
 
 A comprehensive, production-ready Python framework for comparing **Firefly Algorithm** (FA) with classical optimization methods on continuous and discrete benchmark problems.
@@ -45,6 +50,7 @@ This project implements and benchmarks multiple optimization algorithms with:
 ## 📁 Project Structure
 
 ```
+
 CSTTNT_DA1/
 ├── src/
 │   ├── core/                      # Base classes and utilities
@@ -81,22 +87,22 @@ CSTTNT_DA1/
 ├── benchmark/                     # Comprehensive benchmark suite
 │   ├── config.py                  # Centralized benchmark configurations
 │   ├── instance_generator.py      # Knapsack instance generation
-│   ├── run_rastrigin.py          # Rastrigin benchmark runner
-│   ├── run_knapsack.py           # Knapsack benchmark runner
-│   ├── analyze_results.py        # Statistical analysis (Wilcoxon, Friedman)
-│   ├── visualize.py              # Generate all plots
-│   ├── run_all.py                # Master script (parallel execution)
-│   ├── run_all.sh                # Shell script wrapper
-│   ├── test_benchmarks.py        # Benchmark integration tests
-│   ├── results/                  # Auto-generated results
-│   │   ├── rastrigin/           # Rastrigin results by config
-│   │   ├── knapsack/            # Knapsack results by instance
-│   │   ├── plots/               # All visualizations
-│   │   ├── logs/                # Execution logs
-│   │   ├── summaries/           # Statistical summaries
+│   ├── run_rastrigin.py           # Rastrigin benchmark runner
+│   ├── run_knapsack.py            # Knapsack benchmark runner
+│   ├── analyze_results.py         # Statistical analysis (Wilcoxon, Friedman)
+│   ├── visualize.py               # Generate all plots
+│   ├── run_all.py                 # Master script (parallel execution)
+│   ├── run_all.sh                 # Shell script wrapper
+│   ├── test_benchmarks.py         # Benchmark integration tests
+│   ├── results/                   # Auto-generated results
+│   │   ├── rastrigin/             # Rastrigin results by config
+│   │   ├── knapsack/              # Knapsack results by instance
+│   │   ├── plots/                 # All visualizations
+│   │   ├── logs/                  # Execution logs
+│   │   ├── summaries/             # Statistical summaries
 │   │   ├── rastrigin_summary.csv
 │   │   └── knapsack_summary.csv
-│   └── README.md                 # Detailed benchmark documentation
+│   └── README.md                  # Detailed benchmark documentation
 │
 ├── results/                       # Legacy results directory (deprecated)
 ├── demo.py                        # Quick demonstration script
@@ -104,7 +110,8 @@ CSTTNT_DA1/
 ├── requirements.txt               # Python dependencies
 ├── README.md                      # This file
 └── QUICKSTART.md                  # Quick start guide
-```
+
+````
 
 ## 🚀 Getting Started
 
@@ -123,15 +130,17 @@ CSTTNT_DA1/
 ```bash
 git clone https://github.com/1234quan1234/CSTTNT_DA1.git
 cd CSTTNT_DA1
-```
+````
 
 2. Install dependencies using conda (recommended):
+
 ```bash
 conda env create -f environment.yml
 conda activate aisearch
 ```
 
 Or using pip:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -149,15 +158,17 @@ python benchmark/run_all.py --full --jobs 4
 ```
 
 This will:
-- Run all Rastrigin configurations (quick_convergence, multimodal_escape, scalability)
-- Run all Knapsack instances (n=50, 100, 200 with 4 instance types)
-- Perform 30 independent runs per configuration
-- Generate statistical analysis (mean, std, median, Wilcoxon tests, Friedman tests)
-- Create all visualizations in `benchmark/results/plots/`
+
+* Run all Rastrigin configurations (quick_convergence, multimodal_escape, scalability)
+* Run all Knapsack instances (n=50, 100, 200 with 4 instance types)
+* Perform 30 independent runs per configuration
+* Generate statistical analysis (mean, std, median, Wilcoxon tests, Friedman tests)
+* Create all visualizations in `benchmark/results/plots/`
 
 #### Option 2: Run Individual Benchmarks
 
 **Rastrigin Benchmark:**
+
 ```bash
 # Quick convergence test (d=10, ~2 minutes with 4 cores)
 python benchmark/run_rastrigin.py --config quick_convergence --jobs 4
@@ -170,6 +181,7 @@ python benchmark/run_rastrigin.py --config scalability --jobs -1
 ```
 
 **Knapsack Benchmark:**
+
 ```bash
 # Small instances (n=50, ~5 minutes with 4 cores)
 python benchmark/run_knapsack.py --size 50 --jobs 4
@@ -267,7 +279,7 @@ optimizer = FireflyKnapsackOptimizer(
     n_fireflies=60,
     alpha_flip=0.2,
     max_flips_per_move=3,
-    constraint_handling="repair",  # NEW: 'repair' or 'penalty'
+    constraint_handling="repair",  # 'repair' or 'penalty'
     seed=42
 )
 
@@ -289,18 +301,21 @@ print(f"Items selected: {np.sum(best_sol)}/{n_items}")
 The framework supports two strategies for handling Knapsack capacity constraints:
 
 1. **Repair Strategy** (`constraint_handling="repair"`):
-   - Infeasible solutions are repaired using greedy removal
-   - Ensures all solutions are feasible
-   - Fair comparison across all algorithms
-   - Recommended for benchmarking
+
+   * Infeasible solutions are repaired using greedy removal
+   * Ensures all solutions are feasible
+   * Fair comparison across all algorithms
+   * Recommended for benchmarking
 
 2. **Penalty Strategy** (`constraint_handling="penalty"`):
-   - Infeasible solutions receive large penalty
-   - Allows exploration of infeasible space
-   - May find better solutions by "cutting corners"
-   - Original implementation behavior
+
+   * Infeasible solutions receive large penalty
+   * Allows exploration of infeasible space
+   * May find better solutions by exploring infeasible regions
+   * Corresponds to the original implementation behavior
 
 **Run benchmarks with both strategies:**
+
 ```bash
 # Repair strategy only (fair comparison)
 python benchmark/run_knapsack.py --size 50 --constraint repair
@@ -350,42 +365,46 @@ print(f"GA: {abs(ga_fit):.6f}")
 
 ### Rastrigin Configurations
 
-| Config Name | Dimension | Budget (evals) | Max Iter | Success Thresholds | Purpose |
-|-------------|-----------|----------------|----------|--------------------|---------|
-| `quick_convergence` | 10 | 10,000 | 250 | Gold: 1.0, Silver: 5.0, Bronze: 10.0 | Fast convergence test |
-| `multimodal_escape` | 30 | 30,000 | 500 | Gold: 1.0, Silver: 10.0, Bronze: 50.0 | Escape local minima |
-| `scalability` | 50 | 50,000 | 625 | Gold: 10.0, Silver: 50.0, Bronze: 100.0 | High-dimensional scaling |
+| Config Name         | Dimension | Budget (evals) | Max Iter | Success Thresholds                      | Purpose                  |
+| ------------------- | --------- | -------------- | -------- | --------------------------------------- | ------------------------ |
+| `quick_convergence` | 10        | 10,000         | 250      | Gold: 1.0, Silver: 10.0, Bronze: 30.0    | Fast convergence test    |
+| `multimodal_escape` | 30        | 30,000         | 500      | Gold: 5.0, Silver: 25.0, Bronze: 50.0   | Escape local minima      |
+| `scalability`       | 50        | 50,000         | 625      | Gold: 10.0, Silver: 50.0, Bronze: 80.0 | High-dimensional scaling |
 
 **Success Levels:**
-- **Gold** 🥇: Very close to global optimum (toughest threshold)
-- **Silver** 🥈: Escaped bad regions, found good local minimum
-- **Bronze** 🥉: Escaped worst regions (most lenient threshold)
+
+* **Gold** 🥇: Very close to global optimum (toughest threshold)
+* **Silver** 🥈: Escaped bad regions, found good local minimum
+* **Bronze** 🥉: Escaped worst regions (most lenient threshold)
 
 **Algorithm Parameters:**
-- **FA**: n_fireflies=40, α=0.3, β₀=1.0, γ=1.0
-- **SA**: T₀=100, cooling=0.95, step=0.5
-- **HC**: neighbors=20, step=0.5, restart=50
-- **GA**: pop=40, crossover=0.8, mutation=0.1
+
+* **FA**: n_fireflies=40, α=0.3, β₀=1.0, γ=1.0
+* **SA**: T₀=100, cooling=0.95, step=0.5
+* **HC**: neighbors=20, step=0.5, restart=50
+* **GA**: pop=40, crossover=0.8, mutation=0.1
 
 ### Knapsack Configurations
 
-| n Items | Instance Types | Seeds | Budget (evals) | Max Iter (FA/GA) | Max Iter (SA/HC) | DP Optimal? |
-|---------|----------------|-------|----------------|------------------|------------------|-------------|
-| 50 | All 4 types | 42, 123, 999 | 10,000 | 166 | 10,000 | ✓ Yes |
-| 100 | All 4 types | 42, 123, 999 | 15,000 | 250 | 15,000 | ✓ Yes |
-| 200 | Uncorr, Weak | 42, 123, 999 | 30,000 | 500 | 30,000 | ✗ No |
+| n Items | Instance Types | Seeds        | Budget (evals) | Max Iter (FA/GA) | Max Iter (SA/HC) | DP Optimal? |
+| ------- | -------------- | ------------ | -------------- | ---------------- | ---------------- | ----------- |
+| 50      | All 4 types    | 42, 123, 999 | 10,000         | 166              | 10,000           | ✓ Yes       |
+| 100     | All 4 types    | 42, 123, 999 | 15,000         | 250              | 15,000           | ✓ Yes       |
+| 200     | Uncorr, Weak   | 42, 123, 999 | 30,000         | 500              | 30,000           | ✗ No        |
 
 **Instance Types:**
+
 1. **Uncorrelated**: Random values and weights
 2. **Weakly Correlated**: values ≈ weights ± noise
 3. **Strongly Correlated**: values = weights + 100
 4. **Subset-Sum**: values = weights (hardest)
 
 **Algorithm Parameters:**
-- **FA**: n_fireflies=60, α_flip=0.2, max_flips=3, repair="greedy_remove"
-- **SA**: T₀=1000, cooling=0.95
-- **HC**: neighbors=20, restart=100
-- **GA**: pop=60, crossover=0.8, mutation=1/n, elitism=0.1
+
+* **FA**: n_fireflies=60, α_flip=0.2, max_flips=3, repair="greedy_remove"
+* **SA**: T₀=1000, cooling=0.95
+* **HC**: neighbors=20, restart=100
+* **GA**: pop=60, crossover=0.8, mutation=1/n, elitism=0.1
 
 ## 📈 Output Format
 
@@ -460,12 +479,13 @@ All benchmark results are saved in JSON format for reproducibility.
 }
 ```
 
-**Key Improvements:**
-- **Metadata**: Centralized configuration tracking, status breakdown, budget utilization metrics
-- **Tracking**: Every run has `status`, `error_type`, `error_msg` for error investigation
-- **Hit time**: `hit_evaluations` records when target threshold was achieved (null if never hit)
-- **Budget control**: `budget_utilization` ensures algorithm stayed within evaluation budget
-- **Problem seed**: `problem_seed` enables problem reproducibility
+**Highlights:**
+
+* **Metadata**: Centralized configuration tracking, status breakdown, budget utilization metrics
+* **Tracking**: Every run has `status`, `error_type`, `error_msg` for error investigation
+* **Hit time**: `hit_evaluations` records when target threshold was achieved (null if never hit)
+* **Budget control**: `budget_utilization` ensures algorithm stayed within evaluation budget
+* **Problem seed**: `problem_seed` enables problem reproducibility
 
 ### Knapsack Results
 
@@ -517,9 +537,9 @@ All benchmark results are saved in JSON format for reproducibility.
 
 ### Summary CSV Files
 
-Auto-generated by `analyze_results.py` with **NEW columns** for advanced analysis:
+Auto-generated by `analyze_results.py` with additional columns for advanced analysis:
 
-**rastrigin_summary.csv** (NEW columns marked with ⭐):
+**rastrigin_summary.csv** (columns marked with ⭐):
 
 ```csv
 Configuration,Algorithm,Mean,Std,Median,Best,Worst,Q1,Q3,Mean_Time,SR_<=0.1,SR_<=0.001,SR_<=1e-05,HT_med_<=0.1,HT_med_<=0.001,HT_med_<=1e-05,AUC_median,AUC_mean
@@ -529,13 +549,14 @@ multimodal_escape,FA,45.67,12.34,43.21,28.90,78.45,36.78,54.32,6.89,0.60,0.25,0.
 ...
 ```
 
-**New columns explained:**
-- ⭐ `SR_<=tol`: Success rate at tolerance (% runs achieving error ≤ tol)
-- ⭐ `HT_med_<=tol`: Median hitting time (evaluations to reach tolerance)
-- ⭐ `AUC_median`: Anytime performance (log integral, lower is better)
-- ⭐ `AUC_mean`: Mean AUC across all runs
+Columns marked with ⭐:
 
-**knapsack_summary.csv** (NEW columns marked with ⭐):
+* ⭐ `SR_<=tol`: Success rate at tolerance (% runs achieving error ≤ tol)
+* ⭐ `HT_med_<=tol`: Median hitting time (evaluations to reach tolerance)
+* ⭐ `AUC_median`: Anytime performance (log integral, lower is better)
+* ⭐ `AUC_mean`: Mean AUC across all runs
+
+**knapsack_summary.csv** (columns marked with ⭐):
 
 ```csv
 n_items,type,seed,Algorithm,Mean_Value,Std_Value,Mean_Gap_%,Std_Gap_%,Feasibility_Rate,Mean_Time,DP_Optimal,Mean_Norm_Value,Std_Norm_Value,SR_Gap_<=1.0%,SR_Gap_<=5.0%,SR_Gap_<=10.0%,HT_med_<=1%_gap
@@ -545,16 +566,18 @@ n_items,type,seed,Algorithm,Mean_Value,Std_Value,Mean_Gap_%,Std_Gap_%,Feasibilit
 ...
 ```
 
-**New columns explained:**
-- ⭐ `Mean_Norm_Value`: Normalized value (best_value / dp_optimal)
-- ⭐ `SR_Gap_<=X%`: Success rate achieving gap ≤ X%
-- ⭐ `HT_med_<=1%_gap`: Median hitting time to 1% gap target
+Columns marked with ⭐:
+
+* ⭐ `Mean_Norm_Value`: Normalized value (best_value / dp_optimal)
+* ⭐ `SR_Gap_<=X%`: Success rate achieving gap ≤ X%
+* ⭐ `HT_med_<=1%_gap`: Median hitting time to 1% gap target
 
 ### Global Ranks CSV Files
 
-⭐ **NEW**: Generated by `generate_rastrigin_global_ranks()` and `generate_knapsack_global_ranks()`.
+These files are generated by `generate_rastrigin_global_ranks()` and `generate_knapsack_global_ranks()`.
 
 **rastrigin_global_ranks.csv:**
+
 ```csv
 Algorithm,Avg_Rank,N_Configs
 FA,1.47,3
@@ -564,6 +587,7 @@ HC,3.53,3
 ```
 
 **knapsack_global_ranks.csv:**
+
 ```csv
 Algorithm,Avg_Rank,N_Configs
 GA,1.34,36
@@ -572,7 +596,7 @@ SA,3.12,36
 HC,4.65,36
 ```
 
-These ranks show **average position across all configurations** — crucial for fair comparison.
+These ranks show **average position across all configurations** for each algorithm.
 
 ## 📊 Visualizations (Academic Standards)
 
@@ -581,145 +605,166 @@ All plots follow metaheuristic benchmarking best practices and are saved in `ben
 ### Rastrigin Visualizations
 
 1. **Convergence Curves** (`rastrigin_{config}_convergence.png`)
-   - X-axis: Function evaluations (not iterations)
-   - Y-axis: Error to optimum |f(x) - 0| (log scale)
-   - Median trajectory with IQR (25-75%) shaded bands
-   - Shows convergence speed fairly across algorithms
+
+   * X-axis: Function evaluations (not iterations)
+   * Y-axis: Error to optimum |f(x) - 0| (log scale)
+   * Median trajectory with IQR (25–75%) shaded bands
+   * Shows convergence speed fairly across algorithms
 
 2. **Final Error Boxplots** (`rastrigin_{config}_boxplot.png`)
-   - Distribution of final errors across 30 runs
-   - Log scale for better visualization
-   - Mean markers (red diamonds)
-   - Shows robustness and outlier behavior
+
+   * Distribution of final errors across 30 runs
+   * Log scale for better visualization
+   * Mean markers (red diamonds)
+   * Shows robustness and outlier behavior
 
 3. **ECDF Plots** (`rastrigin_{config}_ecdf.png`)
-   - Empirical Cumulative Distribution Function
-   - Shows P(error ≤ x) for each algorithm
-   - Better than mean/median for tail behavior analysis
+
+   * Empirical Cumulative Distribution Function
+   * Shows P(error ≤ x) for each algorithm
+   * Better than mean/median for tail behavior analysis
 
 4. **Scalability Plot** (`rastrigin_scalability.png`)
-   - Mean error vs dimension (d=10/30/50)
-   - Log scale with error bars (±1 std)
-   - Shows which algorithms scale well to higher dimensions
 
-5. **⭐ NEW: Fixed-Target ECDF** (`rastrigin_ecdf_{config}.png`)
-   - COCO/BBOB standard runtime-to-target visualization
-   - Shows empirical CDF of evaluations needed to reach target
-   - Separate plots for Gold/Silver/Bronze targets
-   - Lines for algorithms, linestyles for scenarios
+   * Mean error vs dimension (d=10/30/50)
+   * Log scale with error bars (±1 std)
+   * Shows how algorithms scale to higher dimensions
 
-6. **⭐ NEW: Expected Running Time (ERT)** (`rastrigin_ert_{level}.png`)
-   - Bar charts with confidence intervals
-   - Expected evaluations to reach target (includes failed runs)
-   - Grouped by configuration and scenario
-   - Standard COCO benchmark metric
+5. **Fixed-Target ECDF** (`rastrigin_ecdf_{config}.png`)
 
-7. **⭐ NEW: Fixed-Budget Performance** (`rastrigin_fixed_budget_{config}.png`)
-   - Anytime performance curves
-   - Error achieved at different budget fractions (10%, 30%, 50%, 100%)
-   - Shows convergence trajectory across optimization
+   * COCO/BBOB standard runtime-to-target visualization
+   * Shows empirical CDF of evaluations needed to reach target
+   * Separate plots for Gold/Silver/Bronze targets
+   * Lines for algorithms, linestyles for scenarios
 
-8. **⭐ NEW: Performance Profiles** (`rastrigin_perf_profile.png`)
-   - Dolan-Moré performance profiles
-   - Fraction of problems solved within τ × best time
-   - Standard for robustness comparison
+6. **Expected Running Time (ERT)** (`rastrigin_ert_{level}.png`)
 
-9. **⭐ NEW: Data Profiles** (`rastrigin_data_profile.png`)
-   - Moré-Wild data profiles
-   - Fraction of problems solved as function of budget
-   - Complements performance profiles
+   * Bar charts with confidence intervals
+   * Expected evaluations to reach target (includes failed runs)
+   * Grouped by configuration and scenario
+   * Standard COCO benchmark metric
 
-10. **⭐ NEW: Diversity Analysis** (`rastrigin_diversity_{config}.png`)
-    - Population diversity metrics normalized by √D
-    - Shows Initial, Mid-point (50%), Final, and Drop
-    - Critical for diagnosing premature convergence
+7. **Fixed-Budget Performance** (`rastrigin_fixed_budget_{config}.png`)
 
-11. **⭐ NEW: Stagnation Analysis** (`rastrigin_stagnation_{config}.png`)
-    - Histogram and ECDF of stagnation lengths
-    - Longest period without improvement
-    - Identifies search stalling
+   * Anytime performance curves
+   * Error achieved at different budget fractions (10%, 30%, 50%, 100%)
+   * Shows convergence trajectory across optimization
 
-12. **⭐ NEW: Anytime AUC** (`rastrigin_anytime_auc_{config}.png`)
-    - Area under convergence curve (lower is better)
-    - Integrated performance measure
-    - Shows overall convergence quality
+8. **Performance Profiles** (`rastrigin_perf_profile.png`)
+
+   * Dolan-Moré performance profiles
+   * Fraction of problems solved within τ × best time
+   * Standard tool for robustness comparison
+
+9. **Data Profiles** (`rastrigin_data_profile.png`)
+
+   * Moré-Wild data profiles
+   * Fraction of problems solved as function of budget
+   * Complements performance profiles
+
+10. **Diversity Analysis** (`rastrigin_diversity_{config}.png`)
+
+    * Population diversity metrics normalized by √D
+    * Shows initial, mid-point (50%), final, and overall drop
+    * Helps diagnose premature convergence
+
+11. **Stagnation Analysis** (`rastrigin_stagnation_{config}.png`)
+
+    * Histogram and ECDF of stagnation lengths
+    * Longest period without improvement
+    * Identifies search stalling behavior
+
+12. **Anytime AUC** (`rastrigin_anytime_auc_{config}.png`)
+
+    * Area under convergence curve (lower is better)
+    * Integrated performance measure
+    * Shows overall convergence quality
 
 ### Knapsack Visualizations
 
 **Per-Instance Plots:**
 
 1. **Convergence Curves** (`knapsack_n{size}_{type}_seed{seed}_convergence.png`)
-   - X-axis: Function evaluations
-   - Y-axis: Best value found (higher is better)
-   - Median with IQR bands
-   - **DP optimal reference line** (red dashed) when available
+
+   * X-axis: Function evaluations
+   * Y-axis: Best value found (higher is better)
+   * Median with IQR bands
+   * **DP optimal reference line** (red dashed) when available
 
 2. **Optimality Gap Boxplots** (`knapsack_n{size}_{type}_seed{seed}_gap_boxplot.png`)
-   - Distribution of (DP_opt - best_value) / DP_opt × 100%
-   - Only for n=50, n=100 where DP is feasible
-   - Lower is better (0% = optimal)
+
+   * Distribution of (DP_opt - best_value) / DP_opt × 100%
+   * Only for n=50, n=100 where DP is feasible
+   * Lower is better (0% = optimal)
 
 **Aggregate Plots:**
 
 3. **Feasibility Rate** (`knapsack_feasibility.png`)
-   - Bar chart showing % of feasible solutions
-   - Grouped by n_items (50/100/200)
-   - Sub-grouped by instance type
-   - **Critical metric**: Algorithms violating constraints are penalized
+
+   * Bar chart showing % of feasible solutions
+   * Grouped by n_items (50/100/200)
+   * Sub-grouped by instance type
+   * Key metric: algorithms violating constraints are penalized
 
 4. **Capacity Utilization** (`knapsack_capacity_utilization.png`)
-   - Boxplots of weight_used / capacity
-   - Grouped by n_items
-   - Green line at 1.0 = perfect utilization
-   - Values >1.0 indicate constraint violations
+
+   * Boxplots of weight_used / capacity
+   * Grouped by n_items
+   * Green line at 1.0 = perfect utilization
+   * Values >1.0 indicate constraint violations
 
 5. **Runtime vs Quality** (`knapsack_runtime_quality.png`)
-   - Scatter plot of elapsed_time vs optimality_gap
-   - Shows Pareto front of fast-but-good algorithms
-   - Color-coded by algorithm
-   - Helps identify practical trade-offs
+
+   * Scatter plot of elapsed_time vs optimality_gap
+   * Shows Pareto front of fast-but-good algorithms
+   * Color-coded by algorithm
+   * Helps identify practical trade-offs
 
 6. **Scalability Plots** (`knapsack_{type}_seed{seed}_scalability.png`)
-   - Mean optimality gap vs n_items (50/100/200)
-   - Error bars show ±1 std
-   - Generated for uncorrelated and weakly_correlated types
+
+   * Mean optimality gap vs n_items (50/100/200)
+   * Error bars show ±1 std
+   * Generated for uncorrelated and weakly_correlated types
 
 ## 📈 Performance Metrics
 
 ### Rastrigin Metrics
 
-| Metric | Description | Interpretation |
-|--------|-------------|----------------|
-| **Error to Optimum** | \|f(x) - 0\| | Lower is better (0 = perfect) |
-| **Convergence Speed** | Evals to reach target | Faster is better |
-| **Success Rate** | % runs achieving target error | Higher is better |
-| **ECDF** | P(error ≤ x) | Shows distribution tail |
+| Metric                | Description                   | Interpretation                |
+| --------------------- | ----------------------------- | ----------------------------- |
+| **Error to Optimum**  | |f(x) - 0|                    | Lower is better (0 = perfect) |
+| **Convergence Speed** | Evals to reach target         | Faster is better              |
+| **Success Rate**      | % runs achieving target error | Higher is better              |
+| **ECDF**              | P(error ≤ x)                  | Shows distribution tail       |
 
 ### Knapsack Metrics
 
-| Metric | Description | Interpretation |
-|--------|-------------|----------------|
-| **Optimality Gap** | (DP_opt - value) / DP_opt × 100% | Lower is better (0% = optimal) |
-| **Feasibility Rate** | % feasible solutions | **Must be 100%** |
-| **Capacity Utilization** | weight_used / capacity | Higher is better (≤1.0) |
-| **Runtime** | Elapsed time (seconds) | Lower is better |
+| Metric                   | Description                      | Interpretation                 |
+| ------------------------ | -------------------------------- | ------------------------------ |
+| **Optimality Gap**       | (DP_opt - value) / DP_opt × 100% | Lower is better (0% = optimal) |
+| **Feasibility Rate**     | % feasible solutions             | **Should be 100%**             |
+| **Capacity Utilization** | weight_used / capacity           | Higher is better (≤1.0)        |
+| **Runtime**              | Elapsed time (seconds)           | Lower is better                |
 
 ### Statistical Tests
 
 The benchmark suite performs rigorous statistical analysis:
 
 1. **Friedman Test** (non-parametric ANOVA)
-   - Tests if algorithms have significantly different performance
-   - Reports average ranks (lower is better)
-   - p-value < 0.05 indicates significant differences
+
+   * Tests if algorithms have significantly different performance
+   * Reports average ranks (lower is better)
+   * p-value < 0.05 indicates significant differences
 
 2. **Wilcoxon Signed-Rank Test** (pairwise)
-   - Compares each pair of algorithms
-   - Reports p-values in matrix form
-   - p-value < 0.05 indicates significant difference
-   - Bonferroni correction for multiple comparisons
+
+   * Compares each pair of algorithms
+   * Reports p-values in matrix form
+   * p-value < 0.05 indicates significant difference
+   * Bonferroni correction for multiple comparisons
 
 Example output:
+
 ```
 Average Ranks (lower is better):
   FA: 1.47
@@ -739,32 +784,34 @@ HC   0.0000  0.0000  0.0345       —
 
 ### Rastrigin Performance
 
-| Algorithm | d=10 | d=30 | d=50 | Scaling | Strengths |
-|-----------|------|------|------|---------|-----------|
-| **FA** | ✓✓✓ | ✓✓ | ✓ | Good | Fast early convergence, swarm cooperation |
-| **GA** | ✓✓ | ✓✓ | ✓✓ | Excellent | Stable across dimensions, genetic diversity |
-| **SA** | ✓ | ✗ | ✗ | Poor | Struggles with high-dimensional multimodal |
-| **HC** | ✗ | ✗ | ✗ | Poor | Gets trapped in local minima |
+| Algorithm | d=10 | d=30 | d=50 | Scaling   | Strengths                                   |
+| --------- | ---- | ---- | ---- | --------- | ------------------------------------------- |
+| **FA**    | ✓✓✓  | ✓✓   | ✓    | Good      | Fast early convergence, swarm cooperation   |
+| **GA**    | ✓✓   | ✓✓   | ✓✓   | Excellent | Stable across dimensions, genetic diversity |
+| **SA**    | ✓    | ✗    | ✗    | Poor      | Struggles with high-dimensional multimodal  |
+| **HC**    | ✗    | ✗    | ✗    | Poor      | Gets trapped in local minima                |
 
 **Key Findings:**
-- FA achieves best performance on d=10 due to effective swarm search
-- GA maintains consistent quality across all dimensions
-- SA and HC struggle with multimodal landscapes
+
+* FA achieves best performance on d=10 due to effective swarm search
+* GA maintains consistent quality across all dimensions
+* SA and HC struggle with multimodal landscapes
 
 ### Knapsack Performance
 
-| Algorithm | Uncorr | Weakly | Strongly | Subset | Strengths |
-|-----------|--------|--------|----------|--------|-----------|
-| **FA** | ✓✓ | ✓✓ | ✓✓✓ | ✓ | Good balance, effective repair |
-| **GA** | ✓✓✓ | ✓✓✓ | ✓✓ | ✓✓ | Best overall, strong crossover |
-| **SA** | ✓ | ✓ | ✓ | ✗ | Decent for easy instances |
-| **HC** | ✗ | ✗ | ✗ | ✗ | Poor exploration |
+| Algorithm | Uncorr | Weakly | Strongly | Subset | Strengths                      |
+| --------- | ------ | ------ | -------- | ------ | ------------------------------ |
+| **FA**    | ✓✓     | ✓✓     | ✓✓✓      | ✓      | Good balance, effective repair |
+| **GA**    | ✓✓✓    | ✓✓✓    | ✓✓       | ✓✓     | Best overall, strong crossover |
+| **SA**    | ✓      | ✓      | ✓        | ✗      | Decent for easy instances      |
+| **HC**    | ✗      | ✗      | ✗        | ✗      | Poor exploration               |
 
 **Key Findings:**
-- FA/GA achieve <5% optimality gap for n≤100
-- Strongly correlated instances favor swarm intelligence
-- Subset-sum is hardest for all algorithms (exact value=weight matching)
-- Repair strategies are critical for maintaining feasibility
+
+* FA/GA achieve <5% optimality gap for n≤100
+* Strongly correlated instances favor swarm intelligence
+* Subset-sum is hardest for all algorithms (exact value = weight matching)
+* Repair strategies are critical for maintaining feasibility
 
 ## 🧪 Testing
 
@@ -781,26 +828,28 @@ open htmlcov/index.html      # macOS
 
 ### Test Coverage Status
 
-| Module | Coverage Target | Status |
-|--------|-----------------|--------|
-| `src/core/*.py` | 90%+ | ✓ Achieved |
-| `src/swarm/*.py` | 80%+ | ✓ Achieved |
-| `src/classical/*.py` | 80%+ | ✓ Achieved |
-| `src/problems/*.py` | 85%+ | ✓ Achieved |
-| `benchmark/*.py` | 70%+ | ✓ Achieved |
+| Module               | Coverage Target | Status     |
+| -------------------- | --------------- | ---------- |
+| `src/core/*.py`      | 90%+            | ✓ Achieved |
+| `src/swarm/*.py`     | 80%+            | ✓ Achieved |
+| `src/classical/*.py` | 80%+            | ✓ Achieved |
+| `src/problems/*.py`  | 85%+            | ✓ Achieved |
+| `benchmark/*.py`     | 70%+            | ✓ Achieved |
 
 ### Test Categories
 
 **Unit Tests (`test/`):**
-- `test_continuous_problems.py` - Continuous benchmark functions
-- `test_knapsack_problem.py` - Knapsack problem and DP solver
-- `test_firefly_algorithm.py` - FA continuous and discrete variants
-- `test_classical_algorithms.py` - HC, SA, GA implementations
-- `test_edge_cases.py` - Boundary conditions, extreme inputs
-- `test_parallel_execution.py` - Concurrency, reproducibility
-- `test_utils.py` - Utility and visualization functions
+
+* `test_continuous_problems.py` - Continuous benchmark functions
+* `test_knapsack_problem.py` - Knapsack problem and DP solver
+* `test_firefly_algorithm.py` - FA continuous and discrete variants
+* `test_classical_algorithms.py` - HC, SA, GA implementations
+* `test_edge_cases.py` - Boundary conditions, extreme inputs
+* `test_parallel_execution.py` - Concurrency, reproducibility
+* `test_utils.py` - Utility and visualization functions
 
 **Integration Tests:**
+
 ```bash
 # Quick integration test (5 runs per config)
 python test/run_all_tests.py --quick
@@ -810,6 +859,7 @@ python test/run_all_tests.py --full
 ```
 
 **Benchmark Tests:**
+
 ```bash
 # Test benchmark infrastructure
 pytest benchmark/test_benchmarks.py -v
@@ -818,16 +868,16 @@ pytest benchmark/test_benchmarks.py -v
 ## 📚 References
 
 1. Yang, X. S. (2008). *Nature-inspired metaheuristic algorithms*. Luniver press.
-2. Yang, X. S. (2010). "Firefly algorithm, stochastic test functions and design optimisation". *International Journal of Bio-Inspired Computation*, 2(2), 78-84.
+2. Yang, X. S. (2010). "Firefly algorithm, stochastic test functions and design optimisation". *International Journal of Bio-Inspired Computation*, 2(2), 78–84.
 3. [Rastrigin Function - Virtual Library of Simulation Experiments](https://www.sfu.ca/~ssurjano/rastr.html)
 4. [Knapsack Problem - Wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem)
-5. Pisinger, D. (1995). "An expanding-core algorithm for the exact 0-1 knapsack problem". *European Journal of Operational Research*, 87(1), 175-187.
-6. Wilcoxon, F. (1945). "Individual comparisons by ranking methods". *Biometrics Bulletin*, 1(6), 80-83.
-7. Friedman, M. (1937). "The use of ranks to avoid the assumption of normality implicit in the analysis of variance". *Journal of the American Statistical Association*, 32(200), 675-701.
+5. Pisinger, D. (1995). "An expanding-core algorithm for the exact 0-1 knapsack problem". *European Journal of Operational Research*, 87(1), 175–187.
+6. Wilcoxon, F. (1945). "Individual comparisons by ranking methods". *Biometrics Bulletin*, 1(6), 80–83.
+7. Friedman, M. (1937). "The use of ranks to avoid the assumption of normality implicit in the analysis of variance". *Journal of the American Statistical Association*, 32(200), 675–701.
 
 ## 👥 Contributors
 
-- Bùi Anh Quân (@1234quan1234)
+* Bùi Anh Quân (@1234quan1234)
 
 ## 📝 License
 
@@ -840,3 +890,4 @@ This project is for educational purposes as part of the CSTTNT (Cơ Sở Trí Tu
 **For quick start guide, see:** [`QUICKSTART.md`](QUICKSTART.md)
 
 **For testing guide, see:** [`test/README.md`](test/README.md)
+
