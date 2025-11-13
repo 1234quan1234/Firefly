@@ -70,9 +70,8 @@ CSTTNT_DA1/
 │       └── visualization.py       # Academic-grade plotting functions
 │
 ├── test/                          # Unit tests (>80% coverage)
-│   ├── test_continuous_problems.py
-│   ├── test_knapsack_problem.py
-│   ├── test_firefly_algorithm.py
+│   ├── test_problems.py           # Tests for Rastrigin and Knapsack
+│   ├── test_firefly_algorithm.py  # Tests for Firefly Algorithm
 │   ├── test_classical_algorithms.py
 │   ├── test_edge_cases.py
 │   ├── test_parallel_execution.py

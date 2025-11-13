@@ -54,6 +54,9 @@ Each module has built-in tests. Run them to verify everything works:
 # Test core utilities
 python src/core/utils.py
 
+# Test problems (Rastrigin and Knapsack)
+python -m unittest test.test_problems
+
 # Test Rastrigin problem
 python src/problems/continuous/rastrigin.py
 
@@ -75,7 +78,7 @@ python src/classical/genetic_algorithm.py
 
 ```python
 import sys
-sys.path.append('/home/bui-anh-quan/CSTTNT_DA1')
+sys.path.append('/home/bui-anh-quan/Firefly')
 
 from src.problems.continuous.rastrigin import RastriginProblem
 from src.swarm.fa import FireflyContinuousOptimizer
@@ -92,7 +95,7 @@ optimizer = FireflyContinuousOptimizer(
 )
 
 # Run
-best_sol, best_fit, history, trajectory = optimizer.run(max_iter=50)
+best_sol, best_fit, history, stats_history = optimizer.run(max_iter=50)
 
 # Results
 print(f"Best fitness: {best_fit:.6f}")
@@ -103,7 +106,7 @@ print(f"Convergence: {history[0]:.4f} -> {history[-1]:.4f}")
 
 ```python
 import sys
-sys.path.append('/home/bui-anh-quan/CSTTNT_DA1')
+sys.path.append('/home/bui-anh-quan/Firefly')
 
 from src.problems.continuous.rastrigin import RastriginProblem
 from src.swarm.fa import FireflyContinuousOptimizer

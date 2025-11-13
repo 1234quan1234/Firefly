@@ -9,9 +9,9 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.problems.continuous.sphere import SphereProblem
-from src.problems.discrete.tsp import TSPProblem
-from src.swarm.fa import FireflyContinuousOptimizer, FireflyDiscreteTSPOptimizer
+from src.swarm.fa import FireflyContinuousOptimizer, FireflyKnapsackOptimizer
+from src.problems.continuous.rastrigin import RastriginProblem
+from src.problems.discrete.knapsack import KnapsackProblem
 
 
 class TestFireflyContinuousOptimizer(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestFireflyContinuousOptimizer(unittest.TestCase):
     
     def setUp(self):
         """Set up test fixtures."""
-        self.problem = SphereProblem(dim=3)
+        self.problem = RastriginProblem(dim=3)
         self.optimizer = FireflyContinuousOptimizer(
             problem=self.problem,
             n_fireflies=10,
@@ -38,12 +38,13 @@ class TestFireflyContinuousOptimizer(unittest.TestCase):
     
     def test_run_returns_correct_format(self):
         """Test that run() returns correct output format."""
-        best_sol, best_fit, history, trajectory = self.optimizer.run(max_iter=10)
+        best_sol, best_fit, history, stats_history = self.optimizer.run(max_iter=10)
         
         self.assertEqual(len(best_sol), 3)
         self.assertIsInstance(best_fit, (float, np.floating))
         self.assertEqual(len(history), 10)
-        self.assertIsInstance(trajectory, list)
+        self.assertEqual(len(stats_history), 10)
+        self.assertIsInstance(stats_history[0], dict)
     
     def test_convergence(self):
         """Test that algorithm converges (fitness improves)."""
@@ -63,45 +64,56 @@ class TestFireflyContinuousOptimizer(unittest.TestCase):
         self.assertAlmostEqual(fit1, fit2, places=10)
 
 
-class TestFireflyDiscreteTSPOptimizer(unittest.TestCase):
-    """Test cases for discrete TSP Firefly Algorithm."""
+class TestFireflyKnapsackOptimizer(unittest.TestCase):
+    """Test cases for Knapsack Firefly Algorithm."""
     
     def setUp(self):
         """Set up test fixtures."""
-        coords = np.random.RandomState(42).rand(5, 2) * 10
-        self.problem = TSPProblem(coords)
-        self.optimizer = FireflyDiscreteTSPOptimizer(
+        values = np.array([10, 20, 30, 40, 50])
+        weights = np.array([1, 2, 3, 4, 5])
+        capacity = 7.0
+        self.problem = KnapsackProblem(values, weights, capacity)
+        self.optimizer = FireflyKnapsackOptimizer(
             problem=self.problem,
-            n_fireflies=8,
-            alpha_swap=0.2,
-            max_swaps_per_move=2,
+            n_fireflies=10,
+            alpha_flip=0.2,
+            max_flips_per_move=3,
+            constraint_handling="repair",
             seed=42
         )
     
     def test_initialization(self):
         """Test optimizer initialization."""
-        self.assertEqual(self.optimizer.n_fireflies, 8)
-        self.assertEqual(self.optimizer.alpha_swap, 0.2)
-        self.assertEqual(self.optimizer.max_swaps_per_move, 2)
+        self.assertEqual(self.optimizer.n_fireflies, 10)
+        self.assertEqual(self.optimizer.alpha_flip, 0.2)
+        self.assertEqual(self.optimizer.max_flips_per_move, 3)
+        self.assertEqual(self.optimizer.constraint_handling, "repair")
     
-    def test_run_returns_valid_tour(self):
-        """Test that run() returns a valid tour."""
-        best_tour, best_length, history, trajectory = self.optimizer.run(max_iter=10)
+    def test_run_returns_valid_solution(self):
+        """Test that run() returns a valid binary solution."""
+        best_sol, best_fit, history, trajectory = self.optimizer.run(max_iter=10)
         
-        # Check tour validity
-        self.assertEqual(len(best_tour), 5)
-        self.assertEqual(set(best_tour), {0, 1, 2, 3, 4})
+        # Check solution validity
+        self.assertEqual(len(best_sol), 5)
+        self.assertTrue(np.all((best_sol == 0) | (best_sol == 1)))
         
         # Check outputs
-        self.assertIsInstance(best_length, (float, np.floating))
+        self.assertIsInstance(best_fit, (float, np.floating))
         self.assertEqual(len(history), 10)
-        self.assertIsInstance(trajectory, list)
+        self.assertEqual(len(trajectory), 10)
+    
+    def test_feasibility(self):
+        """Test that solutions respect capacity constraint."""
+        best_sol, _, _, _ = self.optimizer.run(max_iter=20)
+        
+        total_weight = np.sum(best_sol * self.problem.weights)
+        self.assertLessEqual(total_weight, self.problem.capacity)
     
     def test_convergence(self):
-        """Test that algorithm improves tour length."""
+        """Test that algorithm improves solution value."""
         _, _, history, _ = self.optimizer.run(max_iter=30)
         
-        # Final should be better than or equal to initial
+        # Final should be better than or equal to initial (minimization)
         self.assertLessEqual(history[-1], history[0])
 
 

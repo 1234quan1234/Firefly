@@ -6,10 +6,12 @@ This folder contains comprehensive unit tests for the AI Search & Optimization F
 ```
 test/
 ├── __init__.py                      # Package initialization
-├── test_continuous_problems.py      # Tests for continuous problems (Sphere, Rastrigin)
+├── test_continuous_problems.py      # Tests for Rastrigin function
 ├── test_knapsack_problem.py         # Tests for Knapsack problem
-├── test_firefly_algorithm.py       # Tests for Firefly Algorithm (continuous & discrete)
+├── test_firefly_algorithm.py        # Tests for Firefly Algorithm (continuous & discrete)
 ├── test_classical_algorithms.py    # Tests for classical algorithms (HC, SA, GA)
+├── test_edge_cases.py              # Edge cases and boundary conditions
+├── test_parallel_execution.py      # Parallel execution tests
 ├── run_all_tests.py                # Main test runner
 └── README.md                       # This file
 ```
@@ -23,6 +25,9 @@ python test/run_all_tests.py
 
 # Or with verbose output
 python test/run_all_tests.py -v
+
+# With parallel execution (faster)
+python test/run_all_tests.py -j 4
 ```
 
 ### Run Specific Test Module
@@ -46,32 +51,51 @@ python -m unittest test.test_continuous_problems.TestSphereProblem.test_optimum_
 ## Test Coverage
 
 ### Continuous Problems (`test_continuous_problems.py`)
-- ✓ Sphere function dimension and bounds
-- ✓ Optimum value verification
+- ✓ Rastrigin function dimension and bounds
+- ✓ Optimum value verification (global minimum at origin)
 - ✓ Fitness calculation correctness
-- ✓ Random solution generation
-- ✓ Rastrigin function properties
+- ✓ Random solution generation within bounds
+- ✓ Multimodality properties
 
 ### Knapsack Problem (`test_knapsack_problem.py`)
 - ✓ Item weights and values
 - ✓ Capacity constraints
-- ✓ Optimal solution verification
-- ✓ Random instance generation
+- ✓ DP optimal solution verification
+- ✓ Random instance generation (4 types: uncorrelated, weakly correlated, strongly correlated, subset-sum)
 - ✓ Invalid input handling
+- ✓ Greedy repair strategy
 
 ### Firefly Algorithm (`test_firefly_algorithm.py`)
-- ✓ Continuous optimizer initialization
-- ✓ Output format validation
-- ✓ Convergence behavior
+- ✓ Continuous optimizer initialization and parameters
+- ✓ Output format validation (solution, fitness, history, stats_history)
+- ✓ Convergence behavior on Rastrigin
 - ✓ Deterministic results with seed
-- ✓ Discrete Knapsack optimizer
-- ✓ Valid solution generation
+- ✓ Knapsack optimizer initialization
+- ✓ Valid binary solution generation
+- ✓ Feasibility constraint checking
+- ✓ Repair vs penalty constraint handling
 
 ### Classical Algorithms (`test_classical_algorithms.py`)
-- ✓ Hill Climbing functionality
+- ✓ Hill Climbing with random restart
 - ✓ Simulated Annealing with temperature schedule
-- ✓ Genetic Algorithm with crossover and mutation
+- ✓ Genetic Algorithm with crossover, mutation, and elitism
 - ✓ Convergence for all algorithms
+- ✓ Constraint handling for Knapsack
+
+### Edge Cases (`test_edge_cases.py`)
+- ✓ Extreme dimensions (d=1, d=100, d=1000)
+- ✓ Zero capacity Knapsack
+- ✓ Empty items
+- ✓ All items too heavy
+- ✓ Single item cases
+- ✓ Boundary parameter values
+- ✓ Invalid inputs (negative dimensions, invalid parameters)
+- ✓ Numerical stability
+
+### Parallel Execution (`test_parallel_execution.py`)
+- ✓ Multiprocessing correctness
+- ✓ Reproducibility with seeds
+- ✓ Performance scaling
 
 ## Testing Visualizations
 
