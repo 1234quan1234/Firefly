@@ -1,8 +1,3 @@
-Hiểu ý rồi: nội dung giữ nguyên, chỉ gọt lại văn phong cho bớt vibe “changelog / NEW feature”, đọc như README sản phẩm ổn định.
-
-Dưới đây là bản đã chỉnh, toàn bộ trong code block để mày copy thẳng vào `README.md`:
-
-```markdown
 # AI Search and Optimization Project
 
 A comprehensive, production-ready Python framework for comparing **Firefly Algorithm** (FA) with classical optimization methods on continuous and discrete benchmark problems.
