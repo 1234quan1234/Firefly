@@ -458,7 +458,7 @@ if __name__ == "__main__":
     parser.add_argument('--size', type=str, default='50',
                         help='Instance size: 50, 100, 200 or "all"')
     parser.add_argument('--type', type=str, default='all',
-                        choices=['all', 'uncorrelated', 'weakly', 'strongly', 'subset'],
+                        choices=['all', 'uncorrelated', 'weakly', 'strongly', 'inverse'],
                         help='Instance type')
     parser.add_argument('--output', type=str, default='benchmark/results/knapsack',
                         help='Output directory')

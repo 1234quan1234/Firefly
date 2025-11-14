@@ -189,6 +189,8 @@ class FireflyContinuousOptimizer(BaseOptimizer):
         stats_history : List[Dict[str, float]]
             Statistical summary at each iteration.
         """
+        if not isinstance(max_iter, int) or max_iter <= 0:
+            raise ValueError(f"max_iter must be a positive integer, got {max_iter}")
         # Initialize
         self._init_population()
         
@@ -433,6 +435,11 @@ class FireflyKnapsackOptimizer(BaseOptimizer):
         Remember that fitness is negated value (minimization framework).
         Actual knapsack value = -best_fitness
         """
+
+        # Validate max_iter
+        if not isinstance(max_iter, int) or max_iter <= 0:
+            raise ValueError(f"max_iter must be a positive integer, got {max_iter}")
+
         # Initialize
         self._init_population()
         

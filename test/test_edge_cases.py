@@ -119,22 +119,14 @@ class TestKnapsackEdgeCases(unittest.TestCase):
         self.assertEqual(best_fit, 0.0, "Fitness should be 0")
     
     def test_empty_items(self):
-        """
-        Test with no items.
+        """Test with no items."""
+        values = np.array([], dtype=int)
+        weights = np.array([], dtype=int)
+        capacity = 10
         
-        Expected: Empty solution.
-        """
-        values = np.array([])
-        weights = np.array([])
-        capacity = 100.0
-        
-        problem = KnapsackProblem(values, weights, capacity)
-        
-        fa = FireflyKnapsackOptimizer(problem, n_fireflies=5, seed=42)
-        best_sol, best_fit, history, _ = fa.run(max_iter=5)
-        
-        self.assertEqual(len(best_sol), 0)
-        self.assertEqual(best_fit, 0.0)
+        # KnapsackProblem should raise ValueError for empty items
+        with self.assertRaises(ValueError):
+            problem = KnapsackProblem(values, weights, capacity)
     
     def test_all_items_too_heavy(self):
         """

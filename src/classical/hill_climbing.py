@@ -150,6 +150,8 @@ class HillClimbingOptimizer(BaseOptimizer):
         stats_history : List[Dict[str, float]]
             For HC (single solution), diversity is always 0.
         """
+        if max_iter is not None and max_iter <= 0:
+            raise ValueError(f"max_iter must be > 0, got {max_iter}")
         # Initialize with random solution
         self.current_solution = self.problem.init_solution(self.rng, n=1)[0]
         if self.constraint_handling == 'repair':  # ✅ ONLY if repair mode

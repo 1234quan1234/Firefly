@@ -79,6 +79,8 @@ class RastriginProblem(ProblemBase):
         upper : float or np.ndarray, optional
             Upper bound(s). Default is 5.12.
         """
+        if dim <= 0:
+            raise ValueError(f"Dimension must be > 0, got {dim}")
         self.dim = dim
         self.A = A
         

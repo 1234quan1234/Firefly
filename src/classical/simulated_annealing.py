@@ -173,6 +173,8 @@ class SimulatedAnnealingOptimizer(BaseOptimizer):
         stats_history : List[Dict[str, float]]
             For SA (single solution), diversity is always 0.
         """
+        if max_iter is not None and max_iter <= 0:
+            raise ValueError(f"max_iter must be > 0, got {max_iter}")
         # Initialize
         self.current_solution = self.problem.init_solution(self.rng, n=1)[0]
         self.current_solution = self._repair_knapsack(self.current_solution)

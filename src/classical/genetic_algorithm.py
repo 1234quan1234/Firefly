@@ -235,6 +235,8 @@ class GeneticAlgorithmOptimizer(BaseOptimizer):
         stats_history : List[Dict[str, float]]
             Statistical summary at each generation.
         """
+        if max_iter is not None and max_iter <= 0:
+            raise ValueError(f"max_iter must be > 0, got {max_iter}")
         # Initialize
         self._init_population()
         
