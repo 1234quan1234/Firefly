@@ -10,16 +10,17 @@ This project implements and benchmarks multiple optimization algorithms with:
 - ✅ **Comprehensive error handling** with actionable error messages
 - ✅ **>80% test coverage** with edge case testing
 - ✅ **Parallel execution** support for faster benchmarking
+- ✅ **COCO/BBOB-standard analysis** with runtime-centric metrics
 - ✅ **Academic-grade visualizations** following metaheuristic best practices
 - ✅ **Reproducible results** with fixed seeds
-- ✅ **Statistical analysis** with Wilcoxon and Friedman tests
+- ✅ **Statistical analysis** with Wilcoxon, Friedman, and effect sizes
 
 ### Algorithms Implemented
 
 #### Swarm Intelligence
 - **Firefly Algorithm (FA)** - Bio-inspired optimization
   - Continuous optimization variant
-  - Discrete Knapsack variant with repair strategies
+  - Discrete Knapsack variant with repair/penalty strategies
 
 #### Classical Baselines
 - **Hill Climbing (HC)** - Greedy local search with restart
@@ -33,20 +34,19 @@ This project implements and benchmarks multiple optimization algorithms with:
   - Dimensions: d=10, 30, 50
   - Global optimum: f(0,...,0) = 0
   - Domain: [-5.12, 5.12]^d
-  - Three test configurations: quick convergence, multimodal escape, scalability
+  - Multi-tier success thresholds (Gold/Silver/Bronze)
 
 #### Discrete Problems
 - **0/1 Knapsack** - Maximize value within capacity constraint
   - Sizes: n=50, 100, 200 items
   - 4 instance types: uncorrelated, weakly correlated, strongly correlated, subset-sum
   - DP optimal solution available for n ≤ 100
-  - Multiple random seeds for statistical robustness
+  - Multi-tier gap thresholds (1%/5%/10%)
 
 ## 📁 Project Structure
 
 ```
-
-CSTTNT_DA1/
+Firefly/
 ├── src/
 │   ├── core/                      # Base classes and utilities
 │   │   ├── base_optimizer.py      # Abstract optimizer interface
@@ -57,338 +57,338 @@ CSTTNT_DA1/
 │   │   ├── continuous/            # Continuous benchmark functions
 │   │   │   └── rastrigin.py       # Rastrigin function
 │   │   └── discrete/              # Discrete optimization problems
-│   │       └── knapsack.py        # 0/1 Knapsack problem with DP solver
+│   │       └── knapsack.py        # 0/1 Knapsack with DP solver
 │   │
 │   ├── swarm/                     # Swarm intelligence algorithms
 │   │   └── fa.py                  # Firefly Algorithm (continuous & discrete)
 │   │
-│   ├── classical/                 # Classical baseline algorithms
-│   │   ├── hill_climbing.py       # Hill Climbing with random restart
-│   │   ├── simulated_annealing.py # Simulated Annealing
-│   │   └── genetic_algorithm.py   # Genetic Algorithm
-│   │
-│   └── utils/                     # Utility modules
-│       └── visualization.py       # Academic-grade plotting functions
-│
-├── test/                          # Unit tests (>80% coverage)
-│   ├── test_problems.py           # Tests for Rastrigin and Knapsack
-│   ├── test_firefly_algorithm.py  # Tests for Firefly Algorithm
-│   ├── test_classical_algorithms.py
-│   ├── test_edge_cases.py
-│   ├── test_parallel_execution.py
-│   ├── run_all_tests.py
-│   └── README.md
+│   └── classical/                 # Classical baseline algorithms
+│       ├── hill_climbing.py
+│       ├── simulated_annealing.py
+│       └── genetic_algorithm.py
 │
 ├── benchmark/                     # Comprehensive benchmark suite
-│   ├── config.py                  # Centralized benchmark configurations
+│   ├── config.py                  # Centralized configurations
 │   ├── instance_generator.py      # Knapsack instance generation
 │   ├── run_rastrigin.py           # Rastrigin benchmark runner
 │   ├── run_knapsack.py            # Knapsack benchmark runner
-│   ├── analyze_results.py         # Statistical analysis (Wilcoxon, Friedman)
-│   ├── visualize.py               # Generate all plots
-│   ├── run_all.py                 # Master script (parallel execution)
-│   ├── run_all.sh                 # Shell script wrapper
-│   ├── test_benchmarks.py         # Benchmark integration tests
-│   ├── results/                   # Auto-generated results
-│   │   ├── rastrigin/             # Rastrigin results by config
-│   │   ├── knapsack/              # Knapsack results by instance
-│   │   ├── plots/                 # All visualizations
-│   │   ├── logs/                  # Execution logs
-│   │   ├── summaries/             # Statistical summaries
-│   │   ├── rastrigin_summary.csv
-│   │   └── knapsack_summary.csv
-│   └── README.md                  # Detailed benchmark documentation
+│   ├── analyze_results.py         # COCO/BBOB-standard analysis
+│   ├── visualize.py               # Academic-grade visualizations
+│   ├── run_all.py                 # Master script with parallelization
+│   ├── test_benchmarks.py         # Integration tests
+│   └── results/                   # Auto-generated results
+│       ├── rastrigin/
+│       ├── knapsack/
+│       ├── plots/                 # All visualizations
+│       ├── summaries/             # CSV analysis outputs
+│       └── logs/
 │
-├── results/                       # Legacy results directory (deprecated)
-├── demo.py                        # Quick demonstration script
+├── test/                          # Unit tests (>80% coverage)
+│   ├── test_problems.py
+│   ├── test_firefly_algorithm.py
+│   ├── test_classical_algorithms.py
+│   ├── test_edge_cases.py
+│   ├── test_parallel_execution.py
+│   └── run_all_tests.py
+│
+├── demo.py                        # Quick demonstration
 ├── environment.yml                # Conda environment
 ├── requirements.txt               # Python dependencies
 ├── README.md                      # This file
-└── QUICKSTART.md                  # Quick start guide
-
-````
+├── QUICKSTART.md                  # Quick start guide
+└── .gitignore
+```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - Python 3.10+
-- NumPy
-- SciPy (for statistical tests)
-- Matplotlib (for visualization)
-- Pandas (for data analysis)
+- NumPy, SciPy, Matplotlib, Pandas
 - pytest (for testing)
 
 ### Installation
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/1234quan1234/CSTTNT_DA1.git
-cd CSTTNT_DA1
-````
+git clone https://github.com/1234quan1234/Firefly.git
+cd Firefly
 
-2. Install dependencies using conda (recommended):
-
-```bash
+# Using conda (recommended)
 conda env create -f environment.yml
-conda activate aisearch
-```
+conda activate firefly
 
-Or using pip:
-
-```bash
+# Or using pip
 pip install -r requirements.txt
 ```
 
 ### Quick Start
 
-#### Option 1: Run Complete Benchmark Suite (Recommended)
+#### Run Complete Benchmark Suite (Recommended)
 
 ```bash
-# Fast mode with parallel execution (use all CPU cores)
+# Quick mode with parallel execution
 python benchmark/run_all.py --quick --jobs -1
 
-# Full benchmark with 4 parallel workers
+# Full benchmark (30 runs per config)
 python benchmark/run_all.py --full --jobs 4
 ```
 
 This will:
+- Run all Rastrigin configurations with multi-tier targets
+- Run all Knapsack instances with gap-based analysis
+- Generate COCO/BBOB-standard metrics (ERT, ECDF, profiles)
+- Create comprehensive visualizations
+- Perform statistical testing with effect sizes
 
-* Run all Rastrigin configurations (quick_convergence, multimodal_escape, scalability)
-* Run all Knapsack instances (n=50, 100, 200 with 4 instance types)
-* Perform 30 independent runs per configuration
-* Generate statistical analysis (mean, std, median, Wilcoxon tests, Friedman tests)
-* Create all visualizations in `benchmark/results/plots/`
+#### Run Individual Benchmarks
 
-#### Option 2: Run Individual Benchmarks
-
-**Rastrigin Benchmark:**
-
+**Rastrigin:**
 ```bash
-# Quick convergence test (d=10, ~2 minutes with 4 cores)
 python benchmark/run_rastrigin.py --config quick_convergence --jobs 4
-
-# Multimodal escape test (d=30, ~5 minutes)
 python benchmark/run_rastrigin.py --config multimodal_escape --jobs -1
-
-# Scalability test (d=50, ~10 minutes)
-python benchmark/run_rastrigin.py --config scalability --jobs -1
+python benchmark/run_rastrigin.py --config scalability --jobs 4
 ```
 
-**Knapsack Benchmark:**
-
+**Knapsack:**
 ```bash
-# Small instances (n=50, ~5 minutes with 4 cores)
 python benchmark/run_knapsack.py --size 50 --jobs 4
-
-# Medium instances with DP optimal (n=100, ~15 minutes)
 python benchmark/run_knapsack.py --size 100 --jobs -1
-
-# Large instances (n=200, ~30 minutes)
 python benchmark/run_knapsack.py --size 200 --jobs 4
 ```
 
-#### Option 3: Analysis and Visualization Only
-
-If you already have benchmark results:
+#### Analysis and Visualization
 
 ```bash
-# Generate statistical analysis
+# Generate all analysis artifacts
 python benchmark/analyze_results.py --problem all
 
 # Generate all plots
 python benchmark/visualize.py
 ```
 
-### Quick Test
+## 💡 Key Features
 
-Test individual algorithm implementations:
+### 1. Multi-Tier Success Analysis
 
-```bash
-# Test Firefly Algorithm
-python src/swarm/fa.py
+**Rastrigin:**
+- **Gold** 🥇: |f(x)| ≤ threshold_gold (e.g., 1.0 for d=10)
+- **Silver** 🥈: |f(x)| ≤ threshold_silver (e.g., 10.0)
+- **Bronze** 🥉: |f(x)| ≤ threshold_bronze (e.g., 30.0)
 
-# Test problem definitions
-python src/problems/continuous/rastrigin.py
-python src/problems/discrete/knapsack.py
+**Knapsack:**
+- **Gold** 🥇: Gap ≤ 1% from DP optimal
+- **Silver** 🥈: Gap ≤ 5%
+- **Bronze** 🥉: Gap ≤ 10%
 
-# Test classical algorithms
-python src/classical/hill_climbing.py
-python src/classical/simulated_annealing.py
-python src/classical/genetic_algorithm.py
-```
+Each tier tracks:
+- Success rate
+- Hitting time (evaluations to first success)
+- ECDF of runtime-to-target
 
-## 💡 Usage Examples
+### 2. COCO/BBOB-Standard Metrics
 
-### Example 1: Rastrigin Function with Firefly Algorithm
+Following the COCO (COmparing Continuous Optimizers) framework:
 
+- **Fixed-Target ECDF**: Runtime distribution to reach target
+- **Expected Running Time (ERT)**: Average evaluations to success (with censoring)
+- **Performance Profiles** (Dolan-Moré): Robustness across problems
+- **Data Profiles** (Moré-Wild): Budget-quality tradeoffs
+- **Fixed-Budget Analysis**: Quality achieved at budget checkpoints
+
+### 3. Enhanced Statistical Analysis
+
+- **Wilcoxon signed-rank test** with Holm correction
+- **Vargha-Delaney A12** effect size
+- **Cliff's delta** effect size
+- **Friedman test** for multiple algorithms
+- **Nemenyi post-hoc** with critical difference diagrams
+- **Copeland ranking** for pairwise dominance
+
+### 4. Diversity and Stagnation Analysis (Rastrigin)
+
+- Population diversity tracking (normalized by √D)
+- Diversity evolution: Initial → Mid-point → Final
+- Stagnation detection (longest non-improvement period)
+- Critical for diagnosing premature convergence
+
+### 5. Corrected Gap Computation (Knapsack)
+
+**Important:** Gap computation now correctly handles maximization:
 ```python
-import numpy as np
-from src.problems.continuous.rastrigin import RastriginProblem
-from src.swarm.fa import FireflyContinuousOptimizer
+# CORRECT (for maximization problems)
+gap = 100.0 * (optimal - achieved) / optimal
 
-# Create problem instance
-problem = RastriginProblem(dim=10)
-
-# Create optimizer with parameters tuned for multimodal problems
-optimizer = FireflyContinuousOptimizer(
-    problem=problem,
-    n_fireflies=40,
-    alpha=0.3,      # Higher randomization for exploration
-    beta0=1.0,      # Base attractiveness
-    gamma=1.0,      # Light absorption coefficient
-    seed=42         # For reproducibility
-)
-
-# Run optimization
-best_solution, best_fitness, history, trajectory = optimizer.run(max_iter=100)
-
-print(f"Best fitness: {best_fitness:.6f}")
-print(f"Error to optimum: {abs(best_fitness):.6f}")
-print(f"Convergence: {history[0]:.4f} -> {history[-1]:.4f}")
+# Gap = 0% means optimal solution found
+# Gap = 5% means achieved is 95% of optimal
 ```
 
-### Example 2: Knapsack with Discrete Firefly Algorithm
-
-```python
-import numpy as np
-from src.problems.discrete.knapsack import KnapsackProblem
-from src.swarm.fa import FireflyKnapsackOptimizer
-
-# Create Knapsack instance (uncorrelated type)
-rng = np.random.RandomState(42)
-n_items = 50
-values = rng.randint(10, 100, n_items)
-weights = rng.randint(1, 50, n_items)
-capacity = int(0.5 * np.sum(weights))
-
-problem = KnapsackProblem(values, weights, capacity)
-
-# Compute DP optimal for comparison (feasible for n ≤ 100)
-dp_optimal = problem.solve_dp()
-print(f"DP Optimal: {dp_optimal}")
-
-# Create optimizer with REPAIR strategy (fair comparison)
-optimizer = FireflyKnapsackOptimizer(
-    problem=problem,
-    n_fireflies=60,
-    alpha_flip=0.2,
-    max_flips_per_move=3,
-    constraint_handling="repair",  # 'repair' or 'penalty'
-    seed=42
-)
-
-# Run optimization
-best_sol, best_fit, history, trajectory = optimizer.run(max_iter=166)
-
-total_value = -best_fit  # Negate for actual value
-total_weight = np.sum(best_sol * weights)
-optimality_gap = (dp_optimal - total_value) / dp_optimal * 100
-
-print(f"Best value: {total_value:.0f} (DP: {dp_optimal:.0f})")
-print(f"Optimality gap: {optimality_gap:.2f}%")
-print(f"Weight: {total_weight:.0f}/{capacity} ({total_weight/capacity*100:.1f}%)")
-print(f"Items selected: {np.sum(best_sol)}/{n_items}")
-```
-
-**Constraint Handling Strategies:**
-
-The framework supports two strategies for handling Knapsack capacity constraints:
-
-1. **Repair Strategy** (`constraint_handling="repair"`):
-
-   * Infeasible solutions are repaired using greedy removal
-   * Ensures all solutions are feasible
-   * Fair comparison across all algorithms
-   * Recommended for benchmarking
-
-2. **Penalty Strategy** (`constraint_handling="penalty"`):
-
-   * Infeasible solutions receive large penalty
-   * Allows exploration of infeasible space
-   * May find better solutions by exploring infeasible regions
-   * Corresponds to the original implementation behavior
-
-**Run benchmarks with both strategies:**
-
-```bash
-# Repair strategy only (fair comparison)
-python benchmark/run_knapsack.py --size 50 --constraint repair
-
-# Penalty strategy only (original behavior)
-python benchmark/run_knapsack.py --size 50 --constraint penalty
-
-# Both strategies for comparison
-python benchmark/run_knapsack.py --size 50 --constraint both
-```
-
-### Example 3: Compare All Algorithms
-
-```python
-from src.problems.continuous.rastrigin import RastriginProblem
-from src.swarm.fa import FireflyContinuousOptimizer
-from src.classical.simulated_annealing import SimulatedAnnealingOptimizer
-from src.classical.hill_climbing import HillClimbingOptimizer
-from src.classical.genetic_algorithm import GeneticAlgorithmOptimizer
-
-problem = RastriginProblem(dim=10)
-max_iter = 125  # Same budget for fair comparison
-
-# Firefly Algorithm
-fa = FireflyContinuousOptimizer(problem, n_fireflies=40, alpha=0.3, seed=42)
-_, fa_fit, fa_hist, _ = fa.run(max_iter=max_iter)
-
-# Simulated Annealing
-sa = SimulatedAnnealingOptimizer(problem, initial_temp=100, cooling_rate=0.95, seed=42)
-_, sa_fit, sa_hist, _ = sa.run(max_iter=max_iter)
-
-# Hill Climbing with restart
-hc = HillClimbingOptimizer(problem, num_neighbors=20, restart_interval=50, seed=42)
-_, hc_fit, hc_hist, _ = hc.run(max_iter=max_iter)
-
-# Genetic Algorithm
-ga = GeneticAlgorithmOptimizer(problem, pop_size=40, crossover_rate=0.8, seed=42)
-_, ga_fit, ga_hist, _ = ga.run(max_iter=max_iter)
-
-print(f"FA: {abs(fa_fit):.6f}")
-print(f"SA: {abs(sa_fit):.6f}")
-print(f"HC: {abs(hc_fit):.6f}")
-print(f"GA: {abs(ga_fit):.6f}")
-```
+Previous versions had sign errors that inflated gaps.
 
 ## 📊 Benchmark Configurations
 
-### Rastrigin Configurations
+### Rastrigin
 
-| Config Name         | Dimension | Budget (evals) | Max Iter | Success Thresholds                      | Purpose                  |
-| ------------------- | --------- | -------------- | -------- | --------------------------------------- | ------------------------ |
-| `quick_convergence` | 10        | 10,000         | 250      | Gold: 1.0, Silver: 10.0, Bronze: 30.0    | Fast convergence test    |
-| `multimodal_escape` | 30        | 30,000         | 500      | Gold: 5.0, Silver: 25.0, Bronze: 50.0   | Escape local minima      |
-| `scalability`       | 50        | 50,000         | 625      | Gold: 10.0, Silver: 50.0, Bronze: 80.0 | High-dimensional scaling |
-
-**Success Levels:**
-
-* **Gold** 🥇: Very close to global optimum (toughest threshold)
-* **Silver** 🥈: Escaped bad regions, found good local minimum
-* **Bronze** 🥉: Escaped worst regions (most lenient threshold)
+| Config              | Dim | Budget | Max Iter | Gold   | Silver | Bronze | Purpose             |
+| ------------------- | --- | ------ | -------- | ------ | ------ | ------ | ------------------- |
+| `quick_convergence` | 10  | 10,000 | 250      | 1.0    | 10.0   | 30.0   | Fast convergence    |
+| `multimodal_escape` | 30  | 30,000 | 500      | 5.0    | 25.0   | 50.0   | Escape local minima |
+| `scalability`       | 50  | 50,000 | 625      | 10.0   | 50.0   | 80.0   | High-dimensional    |
 
 **Algorithm Parameters:**
+- FA: n=40, α=0.3, β₀=1.0, γ=1.0
+- SA: T₀=100, cooling=0.95
+- HC: neighbors=20, restart=50
+- GA: pop=40, crossover=0.8, mutation=0.1
 
-* **FA**: n_fireflies=40, α=0.3, β₀=1.0, γ=1.0
-* **SA**: T₀=100, cooling=0.95, step=0.5
-* **HC**: neighbors=20, step=0.5, restart=50
-* **GA**: pop=40, crossover=0.8, mutation=0.1
+### Knapsack
 
-### Knapsack Configurations
+| Size | Types              | Seeds        | Budget | Max Iter (FA/GA) | DP Optimal? |
+| ---- | ------------------ | ------------ | ------ | ---------------- | ----------- |
+| 50   | All 4 types        | 42, 123, 999 | 10,000 | 166              | ✓           |
+| 100  | All 4 types        | 42, 123, 999 | 15,000 | 250              | ✓           |
+| 200  | Uncorr, Weak only  | 42, 123, 999 | 30,000 | 500              | ✗           |
 
-| n Items | Instance Types | Seeds        | Budget (evals) | Max Iter (FA/GA) | Max Iter (SA/HC) | DP Optimal? |
-| ------- | -------------- | ------------ | -------------- | ---------------- | ---------------- | ----------- |
-| 50      | All 4 types    | 42, 123, 999 | 10,000         | 166              | 10,000           | ✓ Yes       |
-| 100     | All 4 types    | 42, 123, 999 | 15,000         | 250              | 15,000           | ✓ Yes       |
-| 200     | Uncorr, Weak   | 42, 123, 999 | 30,000         | 500              | 30,000           | ✗ No        |
+**Gap Thresholds:**
+- Gold: 1% (near-optimal)
+- Silver: 5% (good for pure metaheuristics)
+- Bronze: 10% (acceptable baseline)
 
-**Instance Types:**
+**Algorithm Parameters:**
+- FA: n=60, α_flip=0.2, max_flips=3, repair=greedy
+- SA: T₀=1000, cooling=0.95
+- HC: neighbors=20, restart=100
+- GA: pop=60, crossover=0.8, mutation=1/n, elitism=0.1
 
+## 📈 Output Artifacts
+
+### JSON Results (Compressed)
+
+- Rastrigin: `rastrigin_{config}_{algo}_{scenario}_{timestamp}.json.gz`
+- Knapsack: `knapsack_n{size}_{type}_seed{seed}_{algo}_{scenario}_{timestamp}.json.gz`
+
+**Key improvements:**
+- Multi-tier success tracking
+- Hitting time recording
+- Status tracking (ok/timeout/nan/error)
+- Budget utilization monitoring
+- History stored for all runs (including failures)
+
+### CSV Summaries
+
+Generated by `analyze_results.py`:
+
+**Rastrigin:**
+- `rastrigin_summary.csv`: Basic statistics
+- `rastrigin_fixed_target_ecdf.csv`: ECDF data
+- `rastrigin_ert.csv`: Expected running times
+- `rastrigin_fixed_budget.csv`: Fixed-budget checkpoints
+- `rastrigin_performance_profiles.csv`: Performance profile data
+- `rastrigin_data_profiles.csv`: Data profile data
+- `rastrigin_diversity_summary.csv`: Diversity metrics
+- `rastrigin_stagnation.csv`: Stagnation analysis
+- `rastrigin_pairwise_stats.csv`: Statistical test results
+
+**Knapsack:**
+- `knapsack_summary_by_instance.csv`: Per-instance statistics
+- `knapsack_summary_by_type.csv`: Aggregated by type
+- `knapsack_fixed_target_ecdf.csv`: ECDF for gap thresholds
+- `knapsack_ert.csv`: Expected running times
+- `knapsack_fixed_budget.csv`: Fixed-budget performance
+- `knapsack_performance_profiles.csv`: Dolan-Moré profiles
+- `knapsack_data_profiles.csv`: Moré-Wild profiles
+- `knapsack_pairwise_stats.csv`: Statistical comparisons
+
+### Visualizations
+
+Generated by `visualize.py` in `benchmark/results/plots/`:
+
+**Rastrigin:**
+- Fixed-target ECDF (per config, per tier)
+- ERT bar charts with confidence intervals
+- Fixed-budget convergence curves
+- Performance profiles (Dolan-Moré)
+- Data profiles (Moré-Wild)
+- Diversity panel (4 metrics)
+- Stagnation analysis (histogram + ECDF)
+- Anytime AUC comparison
+- Success breakdown (multi-tier)
+- Cross-scenario comparison
+
+**Knapsack:**
+- Fixed-target ECDF (if DP available)
+- ERT bar charts (per gap threshold)
+- Fixed-budget analysis (gap or value)
+- Performance profiles (Dolan-Moré)
+- Data profiles (Moré-Wild)
+- Pairwise win-loss heatmaps
+- Copeland ranking
+- Success breakdown (multi-tier gaps)
+
+## 🧪 Testing
+
+```bash
+# Run all unit tests
+python test/run_all_tests.py
+
+# Run specific test modules
+python -m unittest test.test_problems
+python -m unittest test.test_firefly_algorithm
+
+# Run benchmark integration tests
+python benchmark/test_benchmarks.py
+```
+
+## 📚 Documentation
+
+- **README.md** (this file): Project overview
+- **QUICKSTART.md**: Quick start guide with examples
+- **benchmark/README.md**: Detailed benchmark documentation
+- **test/README.md**: Testing framework documentation
+
+## 🔬 Scientific Rigor
+
+This framework follows best practices from optimization literature:
+
+1. **COCO/BBOB Standards**: Runtime-centric analysis with fixed-target and fixed-budget perspectives
+2. **Multiple Independent Runs**: 30 runs per configuration for statistical significance
+3. **Multiple Comparisons Correction**: Holm-Bonferroni for family-wise error control
+4. **Effect Size Reporting**: A12 and Cliff's delta alongside p-values
+5. **Reproducibility**: Fixed seeds for all randomness sources
+6. **Budget Control**: Strict evaluation counting with utilization tracking
+7. **Failure Tracking**: All runs logged, including failures with error details
+
+## 📖 References
+
+**COCO Framework:**
+- Hansen et al. (2016). "COCO: A Platform for Comparing Continuous Optimizers"
+
+**Performance Analysis:**
+- Dolan & Moré (2002). "Benchmarking optimization software with performance profiles"
+- Moré & Wild (2009). "Benchmarking derivative-free optimization algorithms"
+
+**Statistical Testing:**
+- Demšar (2006). "Statistical comparisons of classifiers over multiple data sets"
+- García & Herrera (2008). "An extension on statistical comparisons of classifiers"
+
+**Effect Sizes:**
+- Vargha & Delaney (2000). "A critique and improvement of the CL common language effect size"
+- Cliff (1993). "Dominance statistics: Ordinal analyses to answer ordinal questions"
+
+## 📝 License
+
+[Add your license here]
+
+## 🤝 Contributing
+
+[Add contribution guidelines]
+
+## 📧 Contact
+
+[Add contact information]
+
+## 🙏 Acknowledgments
+
+This project implements benchmarking standards from the COCO/BBOB community and follows best practices from computational intelligence literature.
 1. **Uncorrelated**: Random values and weights
 2. **Weakly Correlated**: values ≈ weights ± noise
 3. **Strongly Correlated**: values = weights + 100

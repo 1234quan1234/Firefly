@@ -3,23 +3,20 @@
 ## Installation & Setup
 
 ```bash
-# Navigate to project directory
-cd /home/bui-anh-quan/CSTTNT_DA1
+cd /home/bui-anh-quan/Firefly
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Or use conda environment
 conda env create -f environment.yml
-conda activate aisearch
+conda activate firefly
 ```
 
 ## Quick Demo
 
-Run benchmarks faster with parallel execution:
-
 ```bash
-# Quick demo with 4 parallel workers (much faster!)
+# Quick demo with parallel execution (4 cores)
 python demo.py --parallel --jobs 4
 
 # Or run specific benchmarks
@@ -27,54 +24,99 @@ python benchmark/run_rastrigin.py --config quick_convergence --jobs 4
 python benchmark/run_knapsack.py --size 50 --jobs 4
 ```
 
-This generates plots in `results/` folder demonstrating:
-- Convergence curves on Rastrigin function
-- Knapsack optimization results
-- Algorithm comparisons (FA, SA, HC, GA)
-- Parameter sensitivity analysis
-- Swarm trajectory plots
-
 ## ⏱️ Estimated Runtime (with 4 cores)
 
-| Benchmark | Sequential | Parallel (4 cores) |
-|-----------|------------|-------------------|
-| Rastrigin quick | ~5 min | ~2 min |
-| Rastrigin all | ~45 min | ~15 min |
-| Knapsack n=50 | ~30 min | ~10 min |
-| Knapsack n=100 | ~1 hour | ~20 min |
-| **Total** | ~7 hours | **~2-3 hours** |
+| Benchmark           | Sequential | Parallel (4 cores) |
+| ------------------- | ---------- | ------------------ |
+| Rastrigin quick     | ~5 min     | ~2 min             |
+| Rastrigin all       | ~45 min    | ~15 min            |
+| Knapsack n=50       | ~30 min    | ~10 min            |
+| Knapsack n=100      | ~1 hour    | ~20 min            |
+| Analysis + Plots    | ~10 min    | ~10 min            |
+| **Total Full Suite** | **~7 hours** | **~2-3 hours**     |
+
+## New Features in Analysis
+
+### 1. Multi-Tier Success Analysis
+
+Both problems now track success at multiple difficulty levels:
+
+**Rastrigin:**
+```python
+# Results now include multi-tier tracking
+{
+  "success_levels": {
+    "gold": {"success": false, "threshold": 1.0, "hit_evaluations": null},
+    "silver": {"success": true, "threshold": 10.0, "hit_evaluations": 8200},
+    "bronze": {"success": true, "threshold": 30.0, "hit_evaluations": 3400}
+  }
+}
+```
+
+**Knapsack:**
+```python
+# Gap-based multi-tier tracking
+{
+  "gap_relative": 2.57,  # % gap from optimal
+  "gap_tier": "silver",  # Best tier achieved
+  "success_levels": {
+    "gold": {"success": false, "threshold": 1.0, "hit_evaluations": null},
+    "silver": {"success": true, "threshold": 5.0, "hit_evaluations": 8200},
+    "bronze": {"success": true, "threshold": 10.0, "hit_evaluations": 3400}
+  }
+}
+```
+
+### 2. COCO/BBOB-Standard Analysis
+
+New analysis outputs from `analyze_results.py`:
+
+```bash
+# Generate all COCO/BBOB metrics
+python benchmark/analyze_results.py --problem all
+
+# Output artifacts:
+# - Fixed-target ECDF (runtime-to-target distributions)
+# - Expected Running Time (ERT) with bootstrap CIs
+# - Performance Profiles (Dolan-Moré)
+# - Data Profiles (Moré-Wild)
+# - Fixed-budget checkpoints
+```
+
+### 3. Enhanced Visualizations
+
+```bash
+# Generate all plots
+python benchmark/visualize.py
+
+# New plot types:
+# - ECDF curves (per tier, per config)
+# - ERT bar charts with error bars
+# - Performance profiles (robustness)
+# - Data profiles (budget-quality)
+# - Diversity panels (Rastrigin only)
+# - Stagnation analysis
+# - Pairwise heatmaps (Knapsack)
+# - Copeland rankings
+```
 
 ## Testing Your Implementation
 
-### 1. Test Individual Modules
-
-Each module has built-in tests. Run them to verify everything works:
+### 1. Unit Tests
 
 ```bash
-# Test core utilities
-python src/core/utils.py
+# Run all tests
+python test/run_all_tests.py
 
-# Test problems (Rastrigin and Knapsack)
+# Test specific components
 python -m unittest test.test_problems
-
-# Test Rastrigin problem
-python src/problems/continuous/rastrigin.py
-
-# Test Knapsack problem
-python src/problems/discrete/knapsack.py
-
-# Test Firefly Algorithm
-python src/swarm/fa.py
-
-# Test classical algorithms
-python src/classical/hill_climbing.py
-python src/classical/simulated_annealing.py
-python src/classical/genetic_algorithm.py
+python -m unittest test.test_firefly_algorithm
+python -m unittest test.test_utils
 ```
 
 ### 2. Quick Examples
 
-#### Example 1: Run FA on Rastrigin Function
+#### Example 1: Run FA on Rastrigin with Multi-Tier Tracking
 
 ```python
 import sys
@@ -84,288 +126,337 @@ from src.problems.continuous.rastrigin import RastriginProblem
 from src.swarm.fa import FireflyContinuousOptimizer
 
 # Setup
-problem = RastriginProblem(dim=5)
+problem = RastriginProblem(dim=10)
 optimizer = FireflyContinuousOptimizer(
     problem=problem,
-    n_fireflies=20,
-    alpha=0.3,      # Higher for multimodal
-    beta0=1.0,
-    gamma=0.5,      # Lower for global search
+    n_fireflies=40,
+    alpha=0.3,
     seed=42
 )
 
-# Run
-best_sol, best_fit, history, stats_history = optimizer.run(max_iter=50)
+# Run with multi-tier tracking
+thresholds = {'gold': 1.0, 'silver': 10.0, 'bronze': 30.0}
+best_sol, best_fit, history, stats = optimizer.run(
+    max_iter=250,
+    target_thresholds=thresholds  # NEW: Multi-tier tracking
+)
 
-# Results
+# Check which tiers were achieved
+# (This is tracked internally and saved in results JSON)
 print(f"Best fitness: {best_fit:.6f}")
 print(f"Convergence: {history[0]:.4f} -> {history[-1]:.4f}")
 ```
 
-#### Example 2: Compare Algorithms on Rastrigin
-
-```python
-import sys
-sys.path.append('/home/bui-anh-quan/Firefly')
-
-from src.problems.continuous.rastrigin import RastriginProblem
-from src.swarm.fa import FireflyContinuousOptimizer
-from src.classical.simulated_annealing import SimulatedAnnealingOptimizer
-from src.classical.hill_climbing import HillClimbingOptimizer
-
-problem = RastriginProblem(dim=5)
-
-# Firefly Algorithm
-fa = FireflyContinuousOptimizer(problem, n_fireflies=20, seed=42)
-_, fa_fit, fa_hist, _ = fa.run(max_iter=100)
-
-# Simulated Annealing
-sa = SimulatedAnnealingOptimizer(problem, initial_temp=100, seed=42)
-_, sa_fit, sa_hist, _ = sa.run(max_iter=100)
-
-# Hill Climbing
-hc = HillClimbingOptimizer(problem, num_neighbors=20, seed=42)
-_, hc_fit, hc_hist, _ = hc.run(max_iter=100)
-
-print("Algorithm Comparison on Rastrigin Function:")
-print(f"FA:  {fa_fit:.6f} (improvement: {fa_hist[0] - fa_hist[-1]:.4f})")
-print(f"SA:  {sa_fit:.6f} (improvement: {sa_hist[0] - sa_hist[-1]:.4f})")
-print(f"HC:  {hc_fit:.6f} (improvement: {hc_hist[0] - hc_hist[-1]:.4f})")
-```
-
-#### Example 3: Knapsack with Firefly Algorithm
+#### Example 2: Knapsack with Corrected Gap Analysis
 
 ```python
 import sys
 import numpy as np
-sys.path.append('/home/bui-anh-quan/CSTTNT_DA1')
+sys.path.append('/home/bui-anh-quan/Firefly')
 
 from src.problems.discrete.knapsack import KnapsackProblem
 from src.swarm.fa import FireflyKnapsackOptimizer
-from src.classical.genetic_algorithm import GeneticAlgorithmOptimizer
 
-# Create Knapsack instance
-rng = np.random.RandomState(123)
-n_items = 30
+# Create instance
+rng = np.random.RandomState(42)
+n_items = 50
 values = rng.randint(10, 100, n_items)
 weights = rng.randint(1, 50, n_items)
 capacity = int(0.5 * np.sum(weights))
 
 problem = KnapsackProblem(values, weights, capacity)
+dp_optimal = problem.solve_dp()
 
-# Firefly Algorithm
-fa = FireflyKnapsackOptimizer(problem, n_fireflies=25, seed=42)
-_, fa_value, fa_hist, _ = fa.run(max_iter=100)
+# Run optimization
+optimizer = FireflyKnapsackOptimizer(
+    problem=problem,
+    n_fireflies=60,
+    constraint_handling="repair",  # Fair comparison
+    seed=42
+)
 
-# Genetic Algorithm
-ga = GeneticAlgorithmOptimizer(problem, pop_size=30, seed=42)
-_, ga_value, ga_hist, _ = ga.run(max_iter=100)
+best_sol, best_fit, history, _ = optimizer.run(max_iter=166)
 
-print("Knapsack Results (30 items):")
-print(f"FA: {-fa_value:.2f}")  # Negate for actual value
-print(f"GA: {-ga_value:.2f}")
+# Compute gap correctly (for maximization)
+best_value = -best_fit  # Negate fitness to get value
+gap = 100.0 * (dp_optimal - best_value) / dp_optimal
+
+print(f"DP Optimal: {dp_optimal:.0f}")
+print(f"Best value: {best_value:.0f}")
+print(f"Gap: {gap:.2f}%")
+
+# Check which tier achieved
+if gap <= 1.0:
+    print("Tier: GOLD 🥇")
+elif gap <= 5.0:
+    print("Tier: SILVER 🥈")
+elif gap <= 10.0:
+    print("Tier: BRONZE 🥉")
+else:
+    print("Tier: None")
+```
+
+#### Example 3: Load and Analyze Results
+
+```python
+import sys
+import json
+import gzip
+sys.path.append('/home/bui-anh-quan/Firefly')
+
+from benchmark.analyze_results import load_all_results_to_dataframe
+
+# Load all results into unified DataFrame
+df = load_all_results_to_dataframe('benchmark/results')
+
+# Filter successful runs
+df_ok = df[df['Status'] == 'ok']
+
+# Rastrigin: Check multi-tier success
+df_rast = df_ok[df_ok['Problem'] == 'rastrigin']
+for level in ['Gold', 'Silver', 'Bronze']:
+    success_col = f'Success_{level}'
+    if success_col in df_rast.columns:
+        sr = df_rast[success_col].mean() * 100
+        print(f"Rastrigin {level} Success Rate: {sr:.1f}%")
+
+# Knapsack: Check gap distribution
+df_knap = df_ok[df_ok['Problem'] == 'knapsack']
+if 'Optimality_Gap' in df_knap.columns:
+    gaps = df_knap['Optimality_Gap'].dropna()
+    print(f"\nKnapsack Gap Distribution:")
+    print(f"  Median: {gaps.median():.2f}%")
+    print(f"  Q25-Q75: {gaps.quantile(0.25):.2f}% - {gaps.quantile(0.75):.2f}%")
+    print(f"  Gold (<1%): {(gaps <= 1.0).mean()*100:.1f}%")
+    print(f"  Silver (<5%): {(gaps <= 5.0).mean()*100:.1f}%")
+    print(f"  Bronze (<10%): {(gaps <= 10.0).mean()*100:.1f}%")
 ```
 
 ## Creating Visualizations
 
-The framework includes ready-to-use visualization utilities:
+### Option 1: Use Built-in Visualization Functions
 
 ```python
 import sys
-sys.path.append('/home/bui-anh-quan/CSTTNT_DA1')
+sys.path.append('/home/bui-anh-quan/Firefly')
 
-from src.problems.continuous.rastrigin import RastriginProblem
-from src.swarm.fa import FireflyContinuousOptimizer
-from src.utils.visualization import plot_convergence, plot_comparison
-
-# Run optimization
-problem = RastriginProblem(dim=5)
-optimizer = FireflyContinuousOptimizer(problem, n_fireflies=20, seed=42)
-best_sol, best_fit, history, trajectory = optimizer.run(max_iter=100)
-
-# Plot convergence
-plot_convergence(
-    history,
-    title="FA Convergence on Rastrigin",
-    save_path="my_convergence.png",
-    show=True
+from benchmark.visualize import (
+    plot_rastrigin_fixed_target_ecdf,
+    plot_rastrigin_ert,
+    plot_knapsack_performance_profiles_dolan_more,
+    load_summary
 )
+from pathlib import Path
 
-# Compare multiple algorithms
-from src.classical.simulated_annealing import SimulatedAnnealingOptimizer
+summary_dir = Path('benchmark/results/summaries')
+output_dir = Path('benchmark/results/plots')
 
-sa = SimulatedAnnealingOptimizer(problem, seed=42)
-_, _, sa_hist, _ = sa.run(max_iter=100)
+# Rastrigin ECDF
+ecdf_df = load_summary('rastrigin_fixed_target_ecdf', summary_dir)
+if ecdf_df is not None:
+    plot_rastrigin_fixed_target_ecdf(ecdf_df, output_dir)
 
-plot_comparison(
-    {'FA': history, 'SA': sa_hist},
-    title="FA vs SA",
-    save_path="comparison.png",
-    show=True
-)
+# Rastrigin ERT
+ert_df = load_summary('rastrigin_ert', summary_dir)
+if ert_df is not None:
+    plot_rastrigin_ert(ert_df, output_dir, level='Silver')
+
+# Knapsack Performance Profiles
+perf_df = load_summary('knapsack_performance_profiles', summary_dir)
+if perf_df is not None:
+    plot_knapsack_performance_profiles_dolan_more(perf_df, output_dir)
 ```
 
-### Available Visualization Functions
-
-From `src.utils.visualization`:
-
-- `plot_convergence()` - Single algorithm convergence curve
-- `plot_comparison()` - Multiple algorithms comparison (linear/log scale)
-- `plot_trajectory_2d()` - Swarm movement on 2D landscape
-- `plot_parameter_sensitivity()` - Parameter tuning results
-
-## Interactive Notebooks
-
-For interactive exploration, use Jupyter notebooks:
+### Option 2: Generate All Plots at Once
 
 ```bash
-# Start JupyterLab
-jupyter lab
+# Generate all visualizations from CSV summaries
+python benchmark/visualize.py
 
-# Open notebook
-# notebooks/fa_visualization.ipynb
+# Or for specific problem
+python benchmark/visualize.py --problem rastrigin
+python benchmark/visualize.py --problem knapsack
 ```
 
-The notebook includes:
-- ✓ FA on 2D Rastrigin with contour plots
-- ✓ FA on multimodal landscapes
-- ✓ Algorithm comparison charts
-- ✓ Parameter sensitivity analysis
-- ✓ Optional: animated swarm movement
+## Understanding New Metrics
+
+### 1. Expected Running Time (ERT)
+
+- **Definition**: Average evaluations needed to reach target
+- **Includes failures**: Failed runs use full budget (censored analysis)
+- **Lower is better**: Fewer evaluations = faster convergence
+- **With confidence intervals**: Bootstrap 95% CI
+
+### 2. Performance Profiles (Dolan-Moré)
+
+- **X-axis**: τ = performance ratio (your_time / best_time)
+- **Y-axis**: φ(τ) = fraction of problems solved within τ × best
+- **Higher curve = more robust**: Reaches 100% at smaller τ
+
+### 3. Data Profiles (Moré-Wild)
+
+- **X-axis**: ν = budget (evaluations)
+- **Y-axis**: ψ(ν) = fraction of problems solved within budget ν
+- **Steeper = faster**: Quickly solves more problems
+
+### 4. Fixed-Target ECDF
+
+- **X-axis**: Runtime (evaluations to hit target, log scale)
+- **Y-axis**: ECDF = cumulative fraction of runs hitting target
+- **Leftward shift = faster**: Less time to reach target
+
+### 5. Diversity Metrics (Rastrigin)
+
+- **Normalized by √D**: Allows fair comparison across dimensions
+- **Initial/Mid/Final**: Track diversity evolution
+- **Drop**: Total diversity loss (high = premature convergence)
 
 ## Parameter Tuning Guide
 
 ### Firefly Algorithm (Continuous)
 
-- **n_fireflies** (10-50): Population size
-  - Smaller: Faster, may converge prematurely
-  - Larger: Better exploration, slower
-
-- **alpha** (0.1-0.5): Randomization
-  - Smaller: More exploitation (local search)
-  - Larger: More exploration (avoid local minima)
-
-- **gamma** (0.1-2.0): Light absorption
-  - Smaller: More global search (long-range attraction)
-  - Larger: More local search (short-range attraction)
-
-- **beta0** (0.5-2.0): Base attractiveness
-  - Higher: Stronger attraction between fireflies
-
-**Recommended for different problems:**
-- **Multimodal (Rastrigin)**: gamma=0.5, alpha=0.3, n_fireflies=30
-
-### Firefly Algorithm (Knapsack)
-
-- **n_fireflies** (20-50): Population size
-- **alpha_flip** (0.1-0.4): Random bit flip probability
-  - Lower: More exploitation
-  - Higher: More exploration
-- **max_flips_per_move** (2-5): Directed flips per movement
-  - Controls adaptation speed to better solutions
-
-**Recommended:** alpha_flip=0.2, max_flips_per_move=3
-
-### Simulated Annealing
-
-- **initial_temp** (10-200): Starting temperature
-- **cooling_rate** (0.90-0.99): How fast temperature decreases
-  - Higher (0.99): Slower cooling, more exploration
-  - Lower (0.90): Faster cooling, quicker convergence
-
-### Genetic Algorithm
-
-- **pop_size** (20-100): Population size
-- **crossover_rate** (0.6-0.9): Probability of crossover
-- **mutation_rate** (0.05-0.2): Probability of mutation
-- **elitism** (1-5): Number of best individuals to preserve
-
-## Common Issues & Solutions
-
-### Issue 1: Import errors
 ```python
-# Solution: Add src to path
-import sys
-sys.path.append('/home/bui-anh-quan/CSTTNT_DA1')
-```
-
-### Issue 2: NumPy not found
-```bash
-# Solution: Install numpy
-pip install numpy
-```
-
-### Issue 3: Poor convergence on multimodal functions
-```python
-# Solution: Adjust FA parameters
 optimizer = FireflyContinuousOptimizer(
     problem=problem,
-    n_fireflies=30,      # Increase population
-    alpha=0.3,           # Increase randomization
-    gamma=0.5,           # Decrease gamma for global search
+    n_fireflies=40,   # 20-50 typical, higher for multimodal
+    alpha=0.3,        # 0.1-0.5, higher for more exploration
+    beta0=1.0,        # 0.5-2.0, base attractiveness
+    gamma=1.0,        # 0.1-2.0, lower for global search
     seed=42
 )
 ```
 
+**For multimodal problems (Rastrigin):**
+- Increase `alpha` (0.3-0.5) for more exploration
+- Decrease `gamma` (0.5-1.0) for long-range attraction
+- Increase `n_fireflies` (30-50) for better coverage
+
+### Firefly Algorithm (Knapsack)
+
+```python
+optimizer = FireflyKnapsackOptimizer(
+    problem=problem,
+    n_fireflies=60,           # 40-80 typical
+    alpha_flip=0.2,           # 0.1-0.4, random bit flip prob
+    max_flips_per_move=3,     # 2-5, directed flips
+    constraint_handling="repair",  # "repair" or "penalty"
+    seed=42
+)
+```
+
+**Constraint handling:**
+- **`repair`**: Greedy repair → all solutions feasible → **fair comparison**
+- **`penalty`**: Large penalty → may explore infeasible space
+
+## Common Issues & Solutions
+
+### Issue 1: ECDF is empty for Knapsack
+
+**Symptom**: `build_fixed_target_ecdf` returns empty DataFrame
+
+**Cause**: `hit_evaluations` in JSON is `null` (not pre-computed)
+
+**Solution**: The new code computes runtime from history on-the-fly:
+```python
+# Now handles automatically in analyze_results.py
+df_ecdf = build_fixed_target_ecdf(df, 'knapsack')
+# No longer relies on null hit_evaluations field
+```
+
+### Issue 2: Gap values seem too large
+
+**Symptom**: Most gaps are >100% or negative
+
+**Cause**: Sign error in gap computation (previous version)
+
+**Solution**: Now correctly computes gap for maximization:
+```python
+# CORRECT (current version)
+gap = 100.0 * (optimal - achieved) / optimal
+
+# Gap = 0% means optimal
+# Gap = 5% means achieved is 95% of optimal
+```
+
+### Issue 3: Data profiles show zero success
+
+**Symptom**: All `psi(ν)` values are 0
+
+**Cause**: History contains fitness (negative) instead of value (positive)
+
+**Solution**: Now correctly converts history:
+```python
+# In analyze_results.py, now handles sign conversion:
+if best_value > 0 and best_fitness < 0:
+    values = [-v for v in history]  # Convert to positive
+```
+
+### Issue 4: Performance profiles have infinite ratios
+
+**Symptom**: All algorithms show ratio = ∞
+
+**Cause**: No algorithm successfully solves any instance
+
+**Solution**: Check if targets are too strict, or increase budget:
+```bash
+# Use more lenient targets (Bronze tier)
+# Or increase budget in config.py
+```
+
 ## Next Steps
 
-1. **Run the demo**: `python demo.py` to see all features
-2. **Create visualizations**: Use `history` and `trajectory` to plot convergence
-3. **Run benchmarks**: Compare algorithms across multiple runs
-4. **Tune parameters**: Experiment with different parameter settings
-5. **Extend the framework**: Add custom problems or algorithms
+1. **Run full benchmark**: `python benchmark/run_all.py --full --jobs 4`
+2. **Generate analysis**: `python benchmark/analyze_results.py --problem all`
+3. **Create plots**: `python benchmark/visualize.py`
+4. **Review CSVs**: Check `benchmark/results/summaries/*.csv`
+5. **Read papers**: See references in main README.md
 
 ## File Structure Summary
 
 ```
-src/
-├── core/                   # Base classes
-│   ├── base_optimizer.py   # All optimizers inherit from BaseOptimizer
-│   ├── problem_base.py     # All problems inherit from ProblemBase
-│   └── utils.py            # Helper functions (distances, brightness, etc.)
-│
-├── problems/
-│   ├── continuous/         # Continuous benchmark functions
-│   │   └── rastrigin.py    # Rastrigin function (multimodal)
-│   └── discrete/           # Discrete optimization problems
-│       └── knapsack.py     # 0/1 Knapsack problem
-│
-├── swarm/
-│   └── fa.py              # Firefly Algorithm (continuous & Knapsack)
-│
-├── classical/
-│   ├── hill_climbing.py
-│   ├── simulated_annealing.py
-│   └── genetic_algorithm.py
-│
-└── utils/
-    └── visualization.py    # Plotting utilities
-
-test/                       # Unit tests
-notebooks/                  # Interactive demos
-results/                    # Generated plots (auto-created)
-demo.py                     # Comprehensive demo script
+benchmark/
+├── run_rastrigin.py       # Rastrigin runner with multi-tier tracking
+├── run_knapsack.py        # Knapsack runner with gap-based tracking
+├── analyze_results.py     # COCO/BBOB analysis (NEW: corrected gaps)
+├── visualize.py           # Academic visualizations (NEW: profiles)
+├── config.py              # Centralized configs (multi-tier thresholds)
+└── results/
+    ├── rastrigin/         # Raw JSON.GZ files
+    ├── knapsack/          # Raw JSON.GZ files
+    ├── summaries/         # CSV analysis outputs (NEW: many types)
+    │   ├── rastrigin_fixed_target_ecdf.csv
+    │   ├── rastrigin_ert.csv
+    │   ├── rastrigin_performance_profiles.csv
+    │   ├── knapsack_fixed_target_ecdf.csv
+    │   └── ...
+    └── plots/             # All visualizations (NEW: COCO standard)
+        ├── rastrigin_ecdf_quick_convergence.png
+        ├── rastrigin_ert_silver.png
+        ├── rastrigin_perf_profile.png
+        ├── knapsack_performance_profiles.png
+        └── ...
 ```
 
 ## Key Concepts
 
 ### All algorithms return the same format:
 ```python
-best_solution, best_fitness, history_best, trajectory = optimizer.run(max_iter)
+best_solution, best_fitness, history, trajectory = optimizer.run(max_iter)
 ```
 
-- `best_solution`: Best solution found
-- `best_fitness`: Best objective value (lower is better - minimization)
-- `history_best`: List of best fitness per iteration (for plotting convergence)
-- `trajectory`: List of populations/solutions per iteration (for animation)
+- `history`: List of best fitness per iteration (for convergence plots)
+- `trajectory`: List of populations per iteration (for animations)
+- Multi-tier tracking happens internally and is saved in JSON
 
-### All problems implement:
-- `evaluate(x)`: Returns fitness value (minimize)
-- `init_solution(rng, n)`: Generates n random solutions
-- `clip(X)`: Ensures solutions are within valid bounds
-- `representation_type()`: Returns problem type ("continuous" or "knapsack")
+### All analysis now uses unified DataFrame:
+```python
+from benchmark.analyze_results import load_all_results_to_dataframe
 
-This allows any optimizer to work with any compatible problem!
-- `representation_type()`: Returns problem type ("continuous", "tsp", etc.)
+df = load_all_results_to_dataframe('benchmark/results')
+# Automatically handles JSON and JSON.GZ
+# Extracts multi-tier success_levels
+# Computes runtime-to-target from history
+# Handles both Rastrigin and Knapsack
+```
 
-This allows any optimizer to work with any compatible problem!
+This allows **consistent analysis** across problems and algorithms!
