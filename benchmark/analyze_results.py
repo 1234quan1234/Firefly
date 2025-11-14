@@ -226,9 +226,18 @@ def load_all_results_to_dataframe(results_dir: Union[str, Path]) -> pd.DataFrame
                     'Optimality_Gap': run.get('optimality_gap'),
                     'Constraint_Handling': metadata.get('constraint_handling'),
                     
-                    # History
+                    # History and success_levels
                     'History': run.get('history'),
+                    'Success_Levels': run.get('success_levels'),
+                    'success_levels': run.get('success_levels'),
                 }
+                
+                # Flatten success_levels for quick access (optional, but consistent with Rastrigin)
+                if 'success_levels' in run and run['success_levels']:
+                    for level, level_data in run['success_levels'].items():
+                        flat_run[f'Success_{level.capitalize()}'] = level_data.get('success', False)
+                        flat_run[f'HitEvals_{level.capitalize()}'] = level_data.get('hit_evaluations')
+                        flat_run[f'Threshold_{level.capitalize()}'] = level_data.get('threshold')
                 
                 all_runs.append(flat_run)
         else:
@@ -297,49 +306,88 @@ def build_fixed_target_ecdf(df: pd.DataFrame, problem: str) -> pd.DataFrame:
                         })
     
     elif problem == 'knapsack':
-        # Use success_levels from run results if available
-        if 'success_levels' in df_prob.columns and df_prob['success_levels'].notna().any():
-            # Use pre-computed success_levels from run_knapsack.py
-            levels = ['Gold', 'Silver', 'Bronze']
+        # FIXED: Compute runtime from history instead of using null hit_evaluations
+        df_with_dp = df_prob[df_prob['Has_DP_Optimal'] == True].copy()
+        
+        # Filter valid DP instances
+        def is_valid_dp(dp_val):
+            return dp_val is not None and not np.isnan(dp_val) and dp_val > 0
+        
+        df_with_dp = df_with_dp[df_with_dp['DP_Optimal'].apply(is_valid_dp)]
+        
+        if df_with_dp.empty:
+            logger.warning("Knapsack: No DP optimal available, skipping ECDF")
+            return pd.DataFrame()
+        
+        gap_thresholds = {
+            'Gold': 1.0,
+            'Silver': 5.0,
+            'Bronze': 10.0,
+        }
+        
+        for (n_items, inst_type, inst_seed, scenario), group in df_with_dp.groupby(
+            ['N_Items', 'Instance_Type', 'Instance_Seed', 'Scenario']
+        ):
+            dp_opt = group['DP_Optimal'].iloc[0]
             
-            for (n_items, inst_type, inst_seed, scenario), group in df_prob.groupby(
-                ['N_Items', 'Instance_Type', 'Instance_Seed', 'Scenario']
-            ):
-                for level in levels:
-                    for algo, algo_group in group.groupby('Algorithm'):
-                        runtimes = []
-                        
-                        for _, run in algo_group.iterrows():
-                            success_levels = run.get('success_levels')
-                            if not success_levels or not isinstance(success_levels, dict):
-                                continue
-                            
-                            level_data = success_levels.get(level.lower())
-                            if level_data and level_data.get('success'):
-                                hit_evals = level_data.get('hit_evaluations')
-                                if hit_evals:
-                                    runtimes.append(hit_evals)
-                        
-                        if len(runtimes) == 0:
+            if not is_valid_dp(dp_opt):
+                continue
+            
+            for level_name, gap_thr in gap_thresholds.items():
+                for algo, algo_group in group.groupby('Algorithm'):
+                    runtimes = []
+                    
+                    for _, run in algo_group.iterrows():
+                        history = run['History']
+                        if not history or not isinstance(history, list):
                             continue
                         
-                        # Build ECDF
-                        runtimes_sorted = np.sort(runtimes)
-                        ecdf_vals = np.arange(1, len(runtimes_sorted) + 1) / len(algo_group)
+                        eval_axis = run['Eval_Axis']
                         
-                        for tau, ecdf in zip(runtimes_sorted, ecdf_vals):
-                            ecdf_data.append({
-                                'N_Items': n_items,
-                                'Instance_Type': inst_type,
-                                'Instance_Seed': inst_seed,
-                                'Scenario': scenario,
-                                'Level': level,
-                                'Algorithm': algo,
-                                'tau': float(tau),
-                                'ECDF': float(ecdf)
-                            })
-        else:
-            logger.warning("Knapsack: No success_levels data, skipping ECDF")
+                        # Convert history from fitness (negative) to value (positive) if needed
+                        best_value = run.get('Best_Value')
+                        best_fitness = run.get('Best_Fitness')
+                        
+                        if best_value is not None and best_fitness is not None \
+                           and best_value > 0 and best_fitness < 0:
+                            # history contains negative fitness, convert to positive value
+                            values = [-v if v is not None else None for v in history]
+                        else:
+                            # history already contains positive values or unknown format
+                            values = history
+                        
+                        hit = False
+                        for gen_idx, val in enumerate(values):
+                            if val is None or np.isnan(val):
+                                continue
+                            
+                            # Compute gap: how far from optimal (in %)
+                            gap = 100.0 * (dp_opt - val) / max(dp_opt, 1e-9)
+                            
+                            if gap <= gap_thr:
+                                evals = (gen_idx + 1) * eval_axis
+                                runtimes.append(evals)
+                                hit = True
+                                break
+                    
+                    if len(runtimes) == 0:
+                        continue
+                    
+                    # Build ECDF
+                    runtimes_sorted = np.sort(runtimes)
+                    ecdf_vals = np.arange(1, len(runtimes_sorted) + 1) / len(algo_group)
+                    
+                    for tau, ecdf in zip(runtimes_sorted, ecdf_vals):
+                        ecdf_data.append({
+                            'N_Items': n_items,
+                            'Instance_Type': inst_type,
+                            'Instance_Seed': inst_seed,
+                            'Scenario': scenario,
+                            'Level': level_name,
+                            'Algorithm': algo,
+                            'tau': float(tau),
+                            'ECDF': float(ecdf),
+                        })
     
     return pd.DataFrame(ecdf_data)
 
@@ -459,10 +507,22 @@ def compute_ert(df: pd.DataFrame, problem: str, n_bootstrap: int = 10000) -> pd.
                             continue
                         
                         eval_axis = run['Eval_Axis']
+                        
+                        # Convert history from fitness (negative) to value (positive) if needed
+                        best_value = run.get('Best_Value')
+                        best_fitness = run.get('Best_Fitness')
+                        
+                        if best_value is not None and best_fitness is not None \
+                           and best_value > 0 and best_fitness < 0:
+                            # history contains negative fitness, convert to positive value
+                            values = [-v if v is not None else None for v in history]
+                        else:
+                            # history already contains positive values or unknown format
+                            values = history
+                        
                         hit = False
                         
-                        # CORRECTED GAP COMPUTATION
-                        for gen_idx, val in enumerate(history):
+                        for gen_idx, val in enumerate(values):
                             if val is None or np.isnan(val):
                                 continue
                             
@@ -918,7 +978,19 @@ def build_data_profiles(df: pd.DataFrame, problem: str) -> pd.DataFrame:
                         
                         eval_axis = run['Eval_Axis']
                         
-                        for gen_idx, val in enumerate(history):
+                        # Convert history from fitness (negative) to value (positive) if needed
+                        best_value = run.get('Best_Value')
+                        best_fitness = run.get('Best_Fitness')
+                        
+                        if best_value is not None and best_fitness is not None \
+                           and best_value > 0 and best_fitness < 0:
+                            # history contains negative fitness, convert to positive value
+                            values = [-v if v is not None else None for v in history]
+                        else:
+                            # history already contains positive values or unknown format
+                            values = history
+                        
+                        for gen_idx, val in enumerate(values):
                             evals = (gen_idx + 1) * eval_axis
                             if evals > nu:
                                 break

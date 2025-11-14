@@ -457,6 +457,9 @@ def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='be
                     },
                     'all_results': gap_results
                 }
+                # Define output filename
+                filename = f"knapsack_n{config.n_items}_{config.instance_type}_seed{config.seed}_{algo_name}_{strategy}_{timestamp}.json"
+                result_file = output_path / filename
                 
                 with open(result_file, 'w') as f:
                     json.dump(output_data, f, indent=2)
