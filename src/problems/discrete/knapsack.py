@@ -84,26 +84,38 @@ class KnapsackProblem(ProblemBase):
         Parameters
         ----------
         values : np.ndarray
-            Value of each item, shape (num_items,).
+            Item values, shape (n,).
         weights : np.ndarray
-            Weight of each item, shape (num_items,).
+            Item weights, shape (n,).
         capacity : float
-            Maximum weight capacity.
+            Knapsack capacity (must be positive).
         penalty_coefficient : float, optional
-            Penalty multiplier for exceeding capacity. Default is 1000.
+            Penalty for constraint violation (default: 1000.0).
+        
+        Raises
+        ------
+        ValueError
+            If values and weights have different lengths.
+            If capacity is negative.
+            If arrays are empty.
         """
-        self.values = np.array(values, dtype=float)
-        self.weights = np.array(weights, dtype=float)
+        # Validate inputs
+        if len(values) != len(weights):
+            raise ValueError(f"values and weights must have same length. "
+                            f"Got {len(values)} and {len(weights)}")
+        
+        if len(values) == 0:
+            raise ValueError("values and weights cannot be empty")
+        
+        if capacity < 0:
+            raise ValueError(f"capacity must be non-negative, got {capacity}")
+        
+        self.values = np.asarray(values, dtype=float)
+        self.weights = np.asarray(weights, dtype=float)
         self.capacity = float(capacity)
         self.num_items = len(values)
         self.penalty_coefficient = penalty_coefficient
         
-        # Placeholder for DP optimal (set externally if available)
-        self.dp_optimal = None
-        
-        if len(weights) != self.num_items:
-            raise ValueError("values and weights must have the same length")
-    
     def evaluate(self, x: np.ndarray) -> float:
         """
         Evaluate knapsack solution with minimize-compatible fitness.
@@ -258,6 +270,43 @@ class KnapsackProblem(ProblemBase):
         
         return solutions
     
+    def solve_dp(self) -> float:
+        """
+        Solve 0/1 Knapsack using dynamic programming.
+        
+        Returns
+        -------
+        optimal_value : float
+            Optimal value achievable.
+        
+        Notes
+        -----
+        Uses standard DP with O(n*W) complexity.
+        Only practical for n ≤ 200, W ≤ 100000.
+        """
+        # Convert to integers for DP
+        int_values = self.values.astype(np.int64)
+        int_weights = self.weights.astype(np.int64)
+        int_capacity = int(self.capacity)
+        
+        n = len(int_values)
+        W = int_capacity
+        
+        # DP table: dp[i][w] = max value using first i items with capacity w
+        dp = np.zeros((n + 1, W + 1), dtype=np.int64)
+        
+        for i in range(1, n + 1):
+            for w in range(W + 1):
+                # Option 1: don't take item i-1
+                dp[i][w] = dp[i-1][w]
+                
+                # Option 2: take item i-1 if it fits
+                if int_weights[i-1] <= w:
+                    dp[i][w] = max(dp[i][w], 
+                                dp[i-1][w - int_weights[i-1]] + int_values[i-1])
+        
+        return float(dp[n][W])
+
     def _repair_solution(self, solution: np.ndarray, rng: np.random.RandomState) -> np.ndarray:
         """
         Repair an infeasible solution by removing items until feasible.

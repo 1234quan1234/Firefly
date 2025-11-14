@@ -229,7 +229,7 @@ class KnapsackConfig:
             if self.n_items <= 0:
                 raise ValueError(f"n_items must be > 0, got {self.n_items}")
             
-            valid_types = ['uncorrelated', 'weakly', 'strongly', 'subset']
+            valid_types = ['uncorrelated', 'weakly', 'strongly', 'inverse']
             if self.instance_type not in valid_types:
                 raise ValueError(f"instance_type must be one of {valid_types}, got {self.instance_type}")
             
@@ -449,7 +449,7 @@ def get_knapsack_configs() -> List[KnapsackConfig]:
     
     # Size variations with different instance types
     sizes = [50, 100, 200]
-    instance_types = ['uncorrelated', 'weakly', 'strongly', 'subset']
+    instance_types = ['uncorrelated', 'weakly', 'strongly', 'inverse']
     seeds = [42, 123, 999]
     
     for size in sizes:
