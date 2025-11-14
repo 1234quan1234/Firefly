@@ -258,6 +258,8 @@ def build_fixed_target_ecdf(df: pd.DataFrame, problem: str) -> pd.DataFrame:
     For Rastrigin: use success_levels (gold/silver/bronze)
     For Knapsack: use gap thresholds {1%, 5%, 10%} if DP optimal available
     
+    FIXED: Corrected gap computation for maximization problems.
+    
     Returns DataFrame: Config/Instance, Level, Algorithm, tau (runtime), ECDF
     """
     df_prob = df[df['Problem'] == problem].copy()
@@ -295,83 +297,49 @@ def build_fixed_target_ecdf(df: pd.DataFrame, problem: str) -> pd.DataFrame:
                         })
     
     elif problem == 'knapsack':
-        # SAFETY GATE 2: DP Validation per Instance
-        df_with_dp = df_prob[df_prob['Has_DP_Optimal'] == True].copy()
-        
-        if df_with_dp.empty:
-            logger.warning("Knapsack: No DP optimal available, skipping fixed-target ECDF")
-            return pd.DataFrame()
-        
-        # Filter instances with valid DP optimal
-        def is_valid_dp(dp_val):
-            return dp_val is not None and not np.isnan(dp_val) and dp_val > 0
-        
-        df_with_dp = df_with_dp[df_with_dp['DP_Optimal'].apply(is_valid_dp)]
-        
-        # SAFETY GATE 6: Handle Empty Dataset
-        if df_with_dp.empty:
-            logger.warning("Knapsack: No instances with valid DP optimal after filtering, skipping ECDF")
-            return pd.DataFrame()
-        
-        gap_thresholds = [1.0, 5.0, 10.0]
-        
-        # SAFETY GATE 3: Problem Key Definition
-        for (n_items, inst_type, inst_seed, scenario), group in df_with_dp.groupby(
-            ['N_Items', 'Instance_Type', 'Instance_Seed', 'Scenario']
-        ):
-            dp_opt = group['DP_Optimal'].iloc[0]
+        # Use success_levels from run results if available
+        if 'success_levels' in df_prob.columns and df_prob['success_levels'].notna().any():
+            # Use pre-computed success_levels from run_knapsack.py
+            levels = ['Gold', 'Silver', 'Bronze']
             
-            # Double-check DP validity for this instance
-            if not is_valid_dp(dp_opt):
-                continue
-            
-            for gap_thr in gap_thresholds:
-                for algo, algo_group in group.groupby('Algorithm'):
-                    runtimes = []
-                    
-                    for _, run in algo_group.iterrows():
-                        history = run['History']
-                        if not history or not isinstance(history, list):
-                            continue
+            for (n_items, inst_type, inst_seed, scenario), group in df_prob.groupby(
+                ['N_Items', 'Instance_Type', 'Instance_Seed', 'Scenario']
+            ):
+                for level in levels:
+                    for algo, algo_group in group.groupby('Algorithm'):
+                        runtimes = []
                         
-                        eval_axis = run['Eval_Axis']
-                        
-                        # SAFETY GATE 1: Feasible Gate + CORRECTED GAP COMPUTATION
-                        for gen_idx, val in enumerate(history):
-                            if val is None or np.isnan(val):
+                        for _, run in algo_group.iterrows():
+                            success_levels = run.get('success_levels')
+                            if not success_levels or not isinstance(success_levels, dict):
                                 continue
                             
-                            # FIXED: Correct gap computation for maximization
-                            # val in history is Best_Value (positive when feasible)
-                            # For Knapsack: val is stored as Best_Value in history
-                            # Gap = (DP_Optimal - Best_Value) / DP_Optimal * 100
-                            gap = 100.0 * (dp_opt - val) / max(dp_opt, 1e-9)
-                            
-                            # SAFETY GATE 1: Only count as solved if gap <= threshold
-                            # (Feasibility is already guaranteed by history containing Best_Value)
-                            if gap <= gap_thr:
-                                runtime = (gen_idx + 1) * eval_axis
-                                runtimes.append(runtime)
-                                break
-                    
-                    if len(runtimes) == 0:
-                        continue
-                    
-                    # Build ECDF
-                    runtimes_sorted = np.sort(runtimes)
-                    ecdf_vals = np.arange(1, len(runtimes_sorted) + 1) / len(algo_group)
-                    
-                    for tau, ecdf in zip(runtimes_sorted, ecdf_vals):
-                        ecdf_data.append({
-                            'N_Items': n_items,
-                            'Instance_Type': inst_type,
-                            'Instance_Seed': inst_seed,
-                            'Scenario': scenario,
-                            'Gap_Threshold': gap_thr,
-                            'Algorithm': algo,
-                            'tau': float(tau),
-                            'ECDF': float(ecdf)
-                        })
+                            level_data = success_levels.get(level.lower())
+                            if level_data and level_data.get('success'):
+                                hit_evals = level_data.get('hit_evaluations')
+                                if hit_evals:
+                                    runtimes.append(hit_evals)
+                        
+                        if len(runtimes) == 0:
+                            continue
+                        
+                        # Build ECDF
+                        runtimes_sorted = np.sort(runtimes)
+                        ecdf_vals = np.arange(1, len(runtimes_sorted) + 1) / len(algo_group)
+                        
+                        for tau, ecdf in zip(runtimes_sorted, ecdf_vals):
+                            ecdf_data.append({
+                                'N_Items': n_items,
+                                'Instance_Type': inst_type,
+                                'Instance_Seed': inst_seed,
+                                'Scenario': scenario,
+                                'Level': level,
+                                'Algorithm': algo,
+                                'tau': float(tau),
+                                'ECDF': float(ecdf)
+                            })
+        else:
+            logger.warning("Knapsack: No success_levels data, skipping ECDF")
     
     return pd.DataFrame(ecdf_data)
 
@@ -506,10 +474,6 @@ def compute_ert(df: pd.DataFrame, problem: str, n_bootstrap: int = 10000) -> pd.
                                 successes.append(True)
                                 hit = True
                                 break
-                        
-                        if not hit:
-                            runtimes.append(budget if budget else run['Evaluations'])
-                            successes.append(False)
                     
                     if len(runtimes) == 0:
                         continue

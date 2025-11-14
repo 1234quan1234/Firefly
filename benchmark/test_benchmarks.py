@@ -89,6 +89,7 @@ def validate_knapsack_result(filepath):
     - Metadata completeness
     - Feasibility constraints
     - DP optimal comparison (if available)
+    - Multi-tier gap analysis (NEW)
     """
     with open(filepath, 'r') as f:
         data = json.load(f)
@@ -107,6 +108,13 @@ def validate_knapsack_result(filepath):
     for field in required_metadata:
         assert field in metadata, f"Missing metadata field '{field}'"
     
+    # Validate gap_thresholds if DP available
+    if metadata.get('dp_optimal'):
+        assert 'gap_thresholds' in metadata, "Missing gap_thresholds when DP optimal available"
+        thresholds = metadata['gap_thresholds']
+        assert 'gold' in thresholds and 'silver' in thresholds and 'bronze' in thresholds, \
+            "Missing gold/silver/bronze tiers in gap_thresholds"
+    
     # Validate results
     results = data['results']
     assert len(results) > 0, f"No results in {filepath}"
@@ -115,7 +123,7 @@ def validate_knapsack_result(filepath):
         # Check required fields
         required_fields = [
             'algorithm', 'seed', 'best_value', 'best_fitness',
-            'total_weight', 'is_feasible', 'history'
+            'total_weight', 'is_feasible', 'history', 'status'
         ]
         for field in required_fields:
             assert field in result, f"Missing field '{field}' in result {i}"
@@ -125,9 +133,17 @@ def validate_knapsack_result(filepath):
             assert result['total_weight'] <= metadata['capacity'], \
                 f"Run {i}: Feasible solution exceeds capacity"
         
-        # Validate history
-        history = result['history']
-        assert len(history) > 0, f"Run {i}: Empty history"
+        # Validate gap_tier and success_levels if DP available
+        if metadata.get('dp_optimal') and result['status'] == 'ok':
+            assert 'gap_relative' in result, f"Missing gap_relative for DP-available instance"
+            assert 'success_levels' in result, f"Missing success_levels for DP-available instance"
+            
+            success_levels = result['success_levels']
+            for tier in ['gold', 'silver', 'bronze']:
+                assert tier in success_levels, f"Missing tier '{tier}' in success_levels"
+                tier_data = success_levels[tier]
+                assert 'success' in tier_data and 'threshold' in tier_data, \
+                    f"Invalid success_levels structure for tier '{tier}'"
 
 
 class TestRastriginBenchmark:

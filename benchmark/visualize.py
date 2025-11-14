@@ -1104,6 +1104,10 @@ def plot_knapsack_performance_profiles_dolan_more(df: pd.DataFrame, output_dir: 
     Shows φ(τ) = fraction of problems where r_ps ≤ τ
     Standard metric for comparing algorithm robustness across instances.
     
+    NOTE: With multi-tier gap thresholds (Bronze/Silver/Gold), we can generate
+    separate profiles for each tier, showing how algorithm performance varies
+    with target quality requirements.
+    
     Reference: https://arxiv.org/abs/cs/0102001
     """
     if df is None or df.empty:

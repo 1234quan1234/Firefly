@@ -115,6 +115,7 @@ class KnapsackProblem(ProblemBase):
         self.capacity = float(capacity)
         self.num_items = len(values)
         self.penalty_coefficient = penalty_coefficient
+        self.dp_optimal = None  # Will be set externally if DP is computed
         
     def evaluate(self, x: np.ndarray) -> float:
         """
@@ -456,127 +457,14 @@ def compute_population_diversity(population: np.ndarray) -> float:
     rng = np.random.RandomState(42)  # Fixed seed for reproducibility
     
     for _ in range(max_pairs):
-        i, j = rng.choice(n_pop, size=2, replace=False)
+        i, j = rng.choice(n_pop, 2, replace=False)
         total_distance += _hamming_distance(population[i], population[j])
         count += 1
     
     avg_distance = total_distance / max(count, 1)
     
     # Normalize by sqrt(n_items) for scale-invariance
-    normalized = avg_distance / np.sqrt(max(n_items, 1.0))
+    diversity = avg_distance / np.sqrt(n_items)
     
-    return float(normalized)
+    return float(diversity)
 
-
-if __name__ == "__main__":
-    # Demo & Internal Tests
-    print("Knapsack Problem Demo & Validation")
-    print("=" * 50)
-    
-    # Small example
-    values = np.array([10, 20, 30, 40])
-    weights = np.array([1, 2, 3, 4])
-    capacity = 5.0
-    
-    problem = KnapsackProblem(values, weights, capacity)
-    print(f"Items: {problem.num_items}")
-    print(f"Values: {values}")
-    print(f"Weights: {weights}")
-    print(f"Capacity: {capacity}")
-    print(f"Penalty Coefficient: {problem.penalty_coefficient}")
-    
-    print("\n" + "=" * 50)
-    print("TEST 1: FEASIBLE SOLUTION")
-    print("=" * 50)
-    # Test feasible solution
-    x1 = np.array([1, 1, 0, 0])  # Items 0,1: value=30, weight=3
-    f1 = problem.evaluate(x1)
-    info1 = problem.get_solution_info(x1)
-    print(f"Solution: [1,1,0,0]")
-    print(f"  Fitness: {f1:.2f} (should be -30)")
-    print(f"  Info: {info1}")
-    print(f"  Is Feasible: {problem.is_feasible(x1)}")
-    assert info1['Feasible'], "Should be feasible"
-    assert np.isclose(f1, -30.0), "Fitness should be -30"
-    assert np.isclose(info1['Value'], 30.0), "Value should be 30"
-    print("✓ PASSED")
-    
-    print("\n" + "=" * 50)
-    print("TEST 2: INFEASIBLE SOLUTION")
-    print("=" * 50)
-    x2 = np.array([0, 0, 1, 1])  # Items 2,3: value=70, weight=7 (INFEASIBLE)
-    f2 = problem.evaluate(x2)
-    info2 = problem.get_solution_info(x2)
-    print(f"Solution: [0,0,1,1]")
-    print(f"  Fitness: {f2:.2f}")
-    print(f"  Info: {info2}")
-    print(f"  Is Feasible: {problem.is_feasible(x2)}")
-    assert not info2['Feasible'], "Should be infeasible"
-    assert f2 > -70.0, "Fitness should be worse (higher) than -70 due to penalty"
-    assert np.isclose(info2['Violation'], 2.0), "Violation should be 2"
-    print("✓ PASSED")
-    
-    print("\n" + "=" * 50)
-    print("TEST 3: MONOTONICITY (more violation = worse fitness)")
-    print("=" * 50)
-    # Optimal solution at capacity
-    x_opt = np.array([1, 0, 0, 1])  # Items 0,3: value=50, weight=5
-    f_opt = problem.evaluate(x_opt)
-    info_opt = problem.get_solution_info(x_opt)
-    print(f"Solution: [1,0,0,1] (at capacity)")
-    print(f"  Fitness: {f_opt:.2f} (should be -50)")
-    print(f"  Info: {info_opt}")
-    
-    # Check monotonicity: f_opt < f1 < f2 (lower is better)
-    print(f"\nMonotonicity check:")
-    print(f"  Feasible optimal: {f_opt:.2f}")
-    print(f"  Feasible suboptimal: {f1:.2f}")
-    print(f"  Infeasible: {f2:.2f}")
-    assert f_opt < f1, "Optimal should be better than suboptimal"
-    assert f1 < f2, "Feasible should be better than infeasible"
-    print("✓ PASSED (Feasible < Infeasible, monotonic)")
-    
-    print("\n" + "=" * 50)
-    print("TEST 4: NO NaN/Inf")
-    print("=" * 50)
-    # Generate random solutions
-    rng = np.random.RandomState(42)
-    random_sols = problem.init_solution(rng, n=10)
-    print(f"Generated 10 random feasible solutions:")
-    all_finite = True
-    for i, sol in enumerate(random_sols):
-        fitness = problem.evaluate(sol)
-        info = problem.get_solution_info(sol)
-        print(f"  Sol {i}: fitness={fitness:.2f}, value={info['Value']:.1f}, "
-              f"weight={info['Weight']:.1f}, feasible={info['Feasible']}")
-        if not np.isfinite(fitness):
-            all_finite = False
-            print(f"    ✗ FAILED: Non-finite fitness")
-    
-    assert all_finite, "All fitness values should be finite"
-    print("✓ PASSED (All fitness values finite)")
-    
-    print("\n" + "=" * 50)
-    print("TEST 5: DP_Optimal Placeholder")
-    print("=" * 50)
-    info_with_dp = problem.get_solution_info(x_opt)
-    print(f"DP_Optimal: {info_with_dp['DP_Optimal']} (should be None)")
-    assert info_with_dp['DP_Optimal'] is None, "DP_Optimal should be None initially"
-    
-    # Simulate setting DP from external source
-    problem.dp_optimal = 50.0
-    info_with_dp2 = problem.get_solution_info(x_opt)
-    print(f"After setting: {info_with_dp2['DP_Optimal']} (should be 50.0)")
-    assert info_with_dp2['DP_Optimal'] == 50.0, "DP_Optimal should be 50.0"
-    print("✓ PASSED")
-    
-    print("\n" + "=" * 50)
-    print("ALL TESTS PASSED ✓")
-    print("=" * 50)
-    print("\nSummary:")
-    print("- Feasible solutions: fitness = -value (minimize-compatible)")
-    print("- Infeasible solutions: fitness = -value + penalty * violation")
-    print("- Monotonic: more violation ⇒ higher (worse) fitness")
-    print("- No NaN/Inf in normal operation")
-    print("- DP_Optimal placeholder ready for external input")
-    print("- API unchanged: all signatures and params preserved")

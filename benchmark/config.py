@@ -8,6 +8,25 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# ============================================================================
+# GLOBAL THRESHOLD DEFINITIONS
+# ============================================================================
+
+# Knapsack gap thresholds (relative to DP optimal)
+# Aligned with literature on pure metaheuristics performance
+KNAPSACK_GAP_THRESHOLDS = {
+    'gold': 1.0,    # Near-optimal: <= 1% gap
+    'silver': 5.0,  # Good solution: <= 5% gap
+    'bronze': 10.0  # Acceptable solution: <= 10% gap
+}
+
+# Rastrigin error thresholds (per dimension - will be scaled in config)
+RASTRIGIN_ERROR_BASE = {
+    'gold': 1.0,    # Very close to global optimum
+    'silver': 5.0,  # Escaped bad regions
+    'bronze': 10.0  # Basic convergence
+}
+
 
 def validate_ranges(params: Dict, param_name: str) -> bool:
     """
@@ -48,11 +67,11 @@ def validate_ranges(params: Dict, param_name: str) -> bool:
             raise ValueError(f"{param_name}.gamma must be in [0, 1], got {params['gamma']}")
     
     # Simulated Annealing (SA) validations
-    if 'initial_temp' in params:  # Correct field name
+    if 'initial_temp' in params:
         if params['initial_temp'] <= 0:
             raise ValueError(f"{param_name}.initial_temp must be > 0, got {params['initial_temp']}")
     
-    if 'T0' in params:  # Also check old field name for backward compatibility
+    if 'T0' in params:
         if params['T0'] <= 0:
             raise ValueError(f"{param_name}.T0 must be > 0, got {params['T0']}")
     
@@ -65,20 +84,20 @@ def validate_ranges(params: Dict, param_name: str) -> bool:
             raise ValueError(f"{param_name}.min_temp must be > 0, got {params['min_temp']}")
     
     # Hill Climbing (HC) validations
-    if 'num_neighbors' in params:  # Correct field name
+    if 'num_neighbors' in params:
         if params['num_neighbors'] < 1:
             raise ValueError(f"{param_name}.num_neighbors must be >= 1, got {params['num_neighbors']}")
     
-    if 'n_neighbors' in params:  # Old field name
+    if 'n_neighbors' in params:
         logger.warning(f"{param_name}: Use 'num_neighbors' instead of 'n_neighbors'")
         if params['n_neighbors'] < 1:
             raise ValueError(f"{param_name}.n_neighbors must be >= 1, got {params['n_neighbors']}")
     
-    if 'restart_interval' in params:  # Correct field name
+    if 'restart_interval' in params:
         if params['restart_interval'] < 1:
             raise ValueError(f"{param_name}.restart_interval must be >= 1, got {params['restart_interval']}")
     
-    if 'restart_after' in params:  # Old field name
+    if 'restart_after' in params:
         logger.warning(f"{param_name}: Use 'restart_interval' instead of 'restart_after'")
         if params['restart_after'] < 1:
             raise ValueError(f"{param_name}.restart_after must be >= 1, got {params['restart_after']}")
@@ -152,13 +171,13 @@ class RastriginConfig:
     dim: int
     budget: int
     max_iter: int
-    thresholds: Dict[str, float]  # NEW: Multi-level success thresholds (replaced 'threshold')
-    seeds: range
+    thresholds: Dict[str, float]
+    seeds: list
     fa_params: Dict
     sa_params: Dict
     hc_params: Dict
     ga_params: Dict
-    tuning_grids: Dict  # NEW: Parameter grids for tuning
+    tuning_grids: Dict
     
     def __post_init__(self):
         """Validate configuration after initialization."""
@@ -217,6 +236,7 @@ class KnapsackConfig:
     seed: int
     budget: int
     has_dp_optimal: bool
+    gap_thresholds: Dict[str, float]
     fa_params: Dict
     sa_params: Dict
     hc_params: Dict
@@ -242,7 +262,20 @@ class KnapsackConfig:
             validate_ranges(self.hc_params, 'hc_params')
             validate_ranges(self.ga_params, 'ga_params')
             
-            logger.info(f"KnapsackConfig validated: n={self.n_items}, type={self.instance_type}")
+            # Validate gap_thresholds
+            if not isinstance(self.gap_thresholds, dict):
+                raise ValueError(f"gap_thresholds must be dict, got {type(self.gap_thresholds)}")
+            
+            if len(self.gap_thresholds) == 0:
+                raise ValueError("gap_thresholds cannot be empty")
+            
+            for level, value in self.gap_thresholds.items():
+                if not isinstance(level, str):
+                    raise ValueError(f"gap threshold level must be string, got {type(level)}")
+                if not isinstance(value, (int, float)) or value <= 0:
+                    raise ValueError(f"gap threshold must be positive, got {value}")
+            
+            logger.info(f"KnapsackConfig validated: n={self.n_items}, type={self.instance_type}, thresholds={self.gap_thresholds}")
             
         except ValueError as e:
             logger.error(f"Invalid KnapsackConfig: {e}")
@@ -261,29 +294,21 @@ RASTRIGIN_CONFIGS = {
             'bronze': 30.0
         },
         seeds=list(range(30)),
-
-        # === FA: giữ pop, hạ gamma, alpha vừa phải ===
         fa_params={
             'n_fireflies': 40,
             'alpha': 0.18,
             'beta0': 1.0,
             'gamma': 0.02
         },
-
-        # === SA: chậm hơn một nấc, T_min thấp để tận dụng hết vòng lặp ===
         sa_params={
-            'initial_temp': 100.0,   # ≈ 10*D
+            'initial_temp': 100.0,
             'cooling_rate': 0.97,
             'min_temp': 1e-3
         },
-
-        # === HC: khoảng 3*D láng giềng, restart sớm hơn ===
         hc_params={
             'num_neighbors': 30,
             'restart_interval': 30
         },
-
-        # === GA: crossover cao; mutation quanh 1/D (~0.1) ===
         ga_params={
             'pop_size': 40,
             'crossover_rate': 0.90,
@@ -291,7 +316,6 @@ RASTRIGIN_CONFIGS = {
             'tournament_size': 3,
             'elitism': True
         },
-
         tuning_grids={
             'FA': {
                 'alpha': [0.12, 0.15, 0.18, 0.22],
@@ -322,29 +346,21 @@ RASTRIGIN_CONFIGS = {
             'bronze': 50.0
         },
         seeds=list(range(30)),
-
-        # FA: gamma xuống 0.01 để giữ lực hút tầm xa
         fa_params={
             'n_fireflies': 60,
             'alpha': 0.20,
             'beta0': 1.0,
             'gamma': 0.01
         },
-
-        # SA: chậm rõ rệt khi D=30
         sa_params={
             'initial_temp': 300.0,
             'cooling_rate': 0.99,
             'min_temp': 1e-3
         },
-
-        # HC: mở rộng neighborhood ~3*D, restart sớm
         hc_params={
             'num_neighbors': 90,
             'restart_interval': 40
         },
-
-        # GA: mutation ≈ 1/D ~ 0.03; crossover cao
         ga_params={
             'pop_size': 60,
             'crossover_rate': 0.90,
@@ -352,7 +368,6 @@ RASTRIGIN_CONFIGS = {
             'tournament_size': 5,
             'elitism': True
         },
-
         tuning_grids={
             'FA': {
                 'alpha': [0.15, 0.20, 0.25, 0.30],
@@ -383,37 +398,28 @@ RASTRIGIN_CONFIGS = {
             'bronze': 80.0
         },
         seeds=list(range(30)),
-
-        # FA: gamma về 8e-3 để không tắt lực hút; alpha hơi cao hơn để giữ exploration
         fa_params={
             'n_fireflies': 80,
             'alpha': 0.22,
             'beta0': 1.0,
             'gamma': 0.008
         },
-
-        # SA: rất chậm; T0 ~ 10*D, T_min rất thấp
         sa_params={
             'initial_temp': 500.0,
             'cooling_rate': 0.995,
-            'min_temp': 1e-4
+            'min_temp': 1e-3
         },
-
-        # HC: neighborhood ≈ 3*D; restart dày
         hc_params={
             'num_neighbors': 150,
             'restart_interval': 30
         },
-
-        # GA: mutation ~ 1/D ≈ 0.02; crossover cao; giữ pop để không phá ngân sách
         ga_params={
             'pop_size': 80,
             'crossover_rate': 0.90,
             'mutation_rate': 0.02,
-            'tournament_size': 7,
+            'tournament_size': 5,
             'elitism': True
         },
-
         tuning_grids={
             'FA': {
                 'alpha': [0.18, 0.22, 0.26],
@@ -477,6 +483,8 @@ def get_knapsack_configs() -> List[KnapsackConfig]:
                     instance_type=inst_type,
                     seed=seed,
                     budget=budget,
+                    has_dp_optimal=has_dp,
+                    gap_thresholds=KNAPSACK_GAP_THRESHOLDS.copy(),
                     fa_params={
                         'n_fireflies': n_fireflies,
                         'alpha_flip': 0.2,
@@ -497,8 +505,7 @@ def get_knapsack_configs() -> List[KnapsackConfig]:
                         'mutation_rate': 1.0 / size,
                         'tournament_size': 3,
                         'elitism': True
-                    },
-                    has_dp_optimal=has_dp
+                    }
                 )
                 
                 configs.append(config)

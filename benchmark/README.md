@@ -218,7 +218,7 @@ python benchmark/visualize.py --problem knapsack
 
 ### Knapsack JSON Output
 
-**File naming:** `results/knapsack/knapsack_n{size}_{type}_seed{seed}_{algo}_{timestamp}.json`
+**File naming:** `results/knapsack/knapsack_n{size}_{type}_seed{seed}_{algo}_{strategy}_{timestamp}.json`
 
 **Structure:**
 ```json
@@ -237,30 +237,51 @@ python benchmark/visualize.py --problem knapsack
     "n_failed": 0,
     "status_breakdown": {"ok": 30},
     "dp_optimal": 2450.0,
+    "gap_thresholds": {
+      "gold": 1.0,
+      "silver": 5.0,
+      "bronze": 10.0
+    },
+    "tier_success_rates": {
+      "SR_Gold_%": 5.0,
+      "SR_Silver_%": 45.0,
+      "SR_Bronze_%": 80.0
+    },
+    "constraint_handling": "repair",
     "avg_gap_%": 2.34,
     "avg_feasibility_rate": 1.0
   },
-  "results": [
+  "all_results": [
     {
       "algorithm": "FA",
       "seed": 0,
       "algo_seed": 0,
+      "instance_seed": 42,
       "best_value": 2387.0,
-      "best_fitness": -2387.0,
-      "total_weight": 487.5,
-      "is_feasible": true,
-      "history": [-1200.0, -1500.0, ..., -2387.0],
-      "elapsed_time": 3.45,
-      "items_selected": 18,
-      "capacity_utilization": 0.975,
-      "optimality_gap": 2.57,
-      "status": "ok",
-      "error_type": null,
-      "error_msg": null
+      "gap_relative": 2.57,
+      "gap_tier": "silver",
+      "success_levels": {
+        "gold": {"success": false, "threshold": 1.0, "hit_evaluations": null},
+        "silver": {"success": true, "threshold": 5.0, "hit_evaluations": 8200},
+        "bronze": {"success": true, "threshold": 10.0, "hit_evaluations": 3400}
+      },
+      "status": "ok"
     }
   ]
 }
 ```
+
+**Gap Thresholds (Aligned with Literature):**
+- **Gold (1%)**: Near-optimal solution (competitive with SOTA hybrids)
+- **Silver (5%)**: Good solution (typical for pure metaheuristics)
+- **Bronze (10%)**: Acceptable solution (realistic for hard instances)
+
+**Interpretation:**
+- Pure metaheuristics (FA/GA/SA/HC) achieving Bronze is **expected** on hard instances
+- Silver performance indicates **effective search** without domain knowledge
+- Gold performance is **challenging** without hybrid methods or local search
+
+**Reference:** Gap thresholds based on literature survey of pure metaheuristics on 0/1 Knapsack benchmarks.
 
 ### Summary CSV Files
 

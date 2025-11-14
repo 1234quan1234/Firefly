@@ -269,7 +269,7 @@ class GeneticAlgorithmOptimizer(BaseOptimizer):
                 else:
                     offspring1, offspring2 = parent1.copy(), parent2.copy()
                 
-                # Mutation
+                # Mutation (FIXED: Per-offspring probability, not per-gene)
                 if self.rng.rand() < self.mutation_rate:
                     offspring1 = self._mutate(offspring1)
                 if self.rng.rand() < self.mutation_rate:
@@ -314,6 +314,9 @@ class GeneticAlgorithmOptimizer(BaseOptimizer):
     def _repair_knapsack(self, individual: np.ndarray) -> np.ndarray:
         """
         Repair a Knapsack solution based on constraint_handling switch.
+        
+        NOTE: This is only called if constraint_handling='repair'.
+        Otherwise, penalty handling is done in problem.evaluate().
         """
         if self.constraint_handling != 'repair':
             return individual  # Let penalty handle it

@@ -71,9 +71,10 @@ def solve_knapsack_dp(values, weights, capacity):
     return optimal_value, selection
 
 
-def run_single_knapsack_experiment(algo_name, problem, params, seed, max_iter, instance_seed, constraint_handling='penalty'):
+def run_single_knapsack_experiment(algo_name, problem, params, seed, max_iter, instance_seed, 
+                                   constraint_handling='penalty', gap_thresholds=None):
     """
-    Run single Knapsack experiment with status tracking.
+    Run single Knapsack experiment with status tracking and multi-tier gap analysis.
     
     Parameters
     ----------
@@ -81,11 +82,13 @@ def run_single_knapsack_experiment(algo_name, problem, params, seed, max_iter, i
         Seed used for instance generation (for tracking)
     constraint_handling : str
         'repair' or 'penalty' - controls constraint handling strategy
+    gap_thresholds : dict, optional
+        Multi-tier gap thresholds {'gold': 1.0, 'silver': 5.0, 'bronze': 10.0}
         
     Returns
     -------
     dict
-        Result dict with status tracking (never None)
+        Result dict with status tracking and gap_tier analysis
     """
     import time
     import numpy as np
@@ -186,6 +189,51 @@ def run_single_knapsack_experiment(algo_name, problem, params, seed, max_iter, i
             budget = max_iter
         
         # Success case
+        dp_optimal = getattr(problem, 'dp_optimal', None)
+        
+        # Compute gap tiers if DP optimal available
+        gap_rel = None
+        gap_tier = None
+        success_levels = None
+        
+        if dp_optimal is not None and dp_optimal > 0:
+            gap_rel = float((dp_optimal - total_value) / dp_optimal * 100)
+            
+            # Determine tier
+            if gap_thresholds:
+                if gap_rel <= gap_thresholds.get('gold', 1.0):
+                    gap_tier = 'gold'
+                elif gap_rel <= gap_thresholds.get('silver', 5.0):
+                    gap_tier = 'silver'
+                elif gap_rel <= gap_thresholds.get('bronze', 10.0):
+                    gap_tier = 'bronze'
+                else:
+                    gap_tier = None
+            
+            # Build success_levels dict (similar to Rastrigin)
+            success_levels = {}
+            for level, threshold in (gap_thresholds or {}).items():
+                success = gap_rel <= threshold
+                # Find first generation where gap <= threshold
+                hit_evals = None
+                if success and history:
+                    for gen_idx, val in enumerate(history):
+                        if val is not None and not np.isnan(val):
+                            gen_gap = (dp_optimal - val) / dp_optimal * 100
+                            if gen_gap <= threshold:
+                                if algo_name in ['FA', 'GA']:
+                                    pop_size = params.get('n_fireflies') or params.get('pop_size', 1)
+                                    hit_evals = (gen_idx + 1) * pop_size
+                                else:
+                                    hit_evals = gen_idx + 1
+                                break
+                
+                success_levels[level] = {
+                    'success': bool(success),
+                    'threshold': float(threshold),
+                    'hit_evaluations': int(hit_evals) if hit_evals else None
+                }
+        
         base_result.update({
             'status': 'ok',
             'best_value': float(total_value),
@@ -199,6 +247,9 @@ def run_single_knapsack_experiment(algo_name, problem, params, seed, max_iter, i
             'evaluations': int(actual_evaluations),
             'budget': int(budget),
             'budget_utilization': float(actual_evaluations / budget),
+            'gap_relative': gap_rel,
+            'gap_tier': gap_tier,
+            'success_levels': success_levels,  # NEW
             'error_type': None,
             'error_msg': None
         })
@@ -233,22 +284,7 @@ def run_single_knapsack_experiment(algo_name, problem, params, seed, max_iter, i
 def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='benchmark/results', 
                           n_jobs=None, config_name=None, constraint_handling='penalty'):
     """
-    Run Knapsack benchmark with parallel execution.
-    
-    Parameters
-    ----------
-    size : int or str
-        Number of items (50, 100, 200, or 'all')
-    instance_type : str
-        Instance type
-    output_dir : str
-        Output directory (default: benchmark/results)
-    n_jobs : int, optional
-        Number of parallel jobs
-    config_name : str, optional
-        Config name ('small', 'medium', 'large'). If provided, overrides size/instance_type.
-    constraint_handling : str, optional
-        'repair' or 'penalty' or 'both' - controls constraint handling strategy
+    Run Knapsack benchmark with parallel execution and multi-tier gap analysis.
     """
     
     # Map config_name to size/instance_type if provided
@@ -316,6 +352,7 @@ def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='be
             print("  Computing DP optimal solution...")
             dp_optimal_value, dp_selection = solve_knapsack_dp(values, weights, capacity)
             print(f"  DP optimal value: {dp_optimal_value:.2f}")
+            problem.dp_optimal = dp_optimal_value  # Set on problem instance
         
         # Calculate budget in iterations
         max_iter_fa = config.budget // config.fa_params['n_fireflies']
@@ -336,7 +373,6 @@ def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='be
         for strategy in strategies:
             print(f"\nStrategy: {strategy.upper()}")
             
-            # Run experiments for each algorithm IN PARALLEL
             for algo_name, (algo_params, max_iter) in algorithms.items():
                 print(f"\nRunning {algo_name} with {strategy} strategy ({len(seeds)} runs in parallel)...")
                 
@@ -348,9 +384,9 @@ def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='be
                 else:
                     pop_size = 1
                 
-                # Prepare arguments for parallel execution (NOW includes instance_seed)
+                # Prepare arguments (NOW includes gap_thresholds)
                 args_list = [
-                    (algo_name, problem, algo_params, seed, max_iter, config.seed, strategy)
+                    (algo_name, problem, algo_params, seed, max_iter, config.seed, strategy, config.gap_thresholds)
                     for seed in seeds
                 ]
                 
@@ -384,17 +420,19 @@ def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='be
                 # Calculate average budget utilization (only for successful runs)
                 avg_budget_util = np.mean([r['budget_utilization'] for r in successful_results]) if successful_results else 0.0
                 
-                if len(failed_results) > 0:
-                    logger.warning(f"{algo_name}: {len(failed_results)}/{len(seeds)} runs failed")
+                # Calculate tier-based success rates
+                if dp_optimal_value is not None and config.gap_thresholds:
+                    tier_success = {}
+                    for level in config.gap_thresholds.keys():
+                        n_success = sum(
+                            1 for r in successful_results 
+                            if r.get('success_levels', {}).get(level, {}).get('success', False)
+                        )
+                        tier_success[f'SR_{level.capitalize()}_%'] = float(n_success / len(successful_results) * 100) if successful_results else 0.0
+                else:
+                    tier_success = {}
                 
-                if len(successful_results) == 0:
-                    logger.error(f"{algo_name}: All runs failed, but still saving results")
-                
-                # New naming: knapsack_n{size}_{type}_seed{seed}_{algo}_{timestamp}.json
-                filename = f"knapsack_n{config.n_items}_{config.instance_type}_seed{config.seed}_{algo_name}_{strategy}_{timestamp}.json"
-                result_file = output_path / filename
-                
-                # Add metadata (includes instance_seed and status breakdown)
+                # Add metadata
                 output_data = {
                     'metadata': {
                         'problem': 'knapsack',
@@ -412,9 +450,12 @@ def run_knapsack_benchmark(size=50, instance_type='uncorrelated', output_dir='be
                         'n_successful': len(successful_results),
                         'n_failed': len(failed_results),
                         'status_breakdown': status_counts,
-                        'avg_budget_utilization': float(avg_budget_util)
+                        'avg_budget_utilization': float(avg_budget_util),
+                        'gap_thresholds': config.gap_thresholds if config.gap_thresholds else None,
+                        'tier_success_rates': tier_success,  # NEW
+                        'constraint_handling': strategy,
                     },
-                    'all_results': gap_results  # All results including failed ones
+                    'all_results': gap_results
                 }
                 
                 with open(result_file, 'w') as f:
@@ -464,7 +505,7 @@ if __name__ == "__main__":
                         help='Output directory')
     parser.add_argument('--jobs', type=int, default=None,
                         help='Number of parallel jobs (default: CPU count - 1)')
-    parser.add_argument('--constraint', type=str, default='penalty',
+    parser.add_argument('--constraint', type=str, default='both',
                         choices=['repair', 'penalty', 'both'],
                         help='Constraint handling: repair, penalty, or both')
     
